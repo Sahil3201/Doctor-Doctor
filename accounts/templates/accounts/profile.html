@@ -1,0 +1,17 @@
+{% extends "DoctorDoctor/base.html" %}
+
+{% block title_page %}Profile{% endblock %}
+{% block title %}Profile - DoctorDoctor{% endblock %}
+{% block title_in_li %}Profile{% endblock %}
+
+{% block inner_page %}
+
+{% if user.name %}
+Name: {{user.name}}
+{% endif %}
+
+{% if user.email %}
+Email: {{user.email}}
+{% endif %}
+
+{% endblock %}

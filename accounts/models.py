@@ -1,20 +1,45 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.base_user import BaseUserManager
 
-# Create your models here.
-class Account(AbstractUser):
-    id          = models.CharField(primary_key=True)
-    username    = models.CharField(max_length=255)
-    name        = models.CharField(max_length=255, null=True, blank=True)
-    surname     = models.CharField(max_length=255, null=True, blank=True)
+class CustomUserManager(BaseUserManager):
+	def create_user(self,email,password,username=None,**kwargs):
+		if not email:
+			raise ValueError('Phone Number must be set')
 
-    password    = models.CharField(max_length=255)
-    email       = models.CharField(max_length=255, blank=True)
-    phone_number= models.CharField(blank=True, null=True, unique=True)
-    date_joined = models.DateField(auto_now=True, editable=False)
+		user = self.model(email=email,**kwargs)
+		user.set_password(password)
+		user.save()
+		return user
 
-    is_active   = models.BooleanField(default=True)
-    is_staff    = models.BooleanField(default=False)
+	def create_superuser(self, email, password,username=None, **kwargs):
+		kwargs.setdefault('is_staff', True)
+		kwargs.setdefault('is_superuser', True)
+		kwargs.setdefault('is_active', True)
+		user = self.create_user(email,password,username=None,**kwargs)
+		user.is_admin = True
+		user.save()
+		return user
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['password',]
+##User:
+class CustomUser(AbstractUser):
+	id = models.AutoField(primary_key=True)
+	username = models.CharField(max_length=255,blank=True)
+	name = models.CharField(blank=True,null=True,max_length=255)
+	surname = models.CharField(blank=True,null=True,max_length=255)
+
+	password = models.CharField(max_length=255)
+	email = models.EmailField(max_length=254,unique=True)
+	phone_number = models.IntegerField(blank=True,null=True)
+	date_created = models.DateField(auto_now=True,editable=False)
+
+	is_active = models.BooleanField(default=True)
+	is_admin = models.BooleanField(default=False)
+
+	USERNAME_FIELD = 'email'
+	REQUIRED_FIELDS = []
+
+	objects = CustomUserManager()
+
+	def __str__(self):
+		return str(self.email)

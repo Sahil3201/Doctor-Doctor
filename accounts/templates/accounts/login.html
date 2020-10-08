@@ -1,0 +1,21 @@
+{% extends "DoctorDoctor/base.html" %}
+
+{% block title_page %}Login{% endblock %}
+{% block title %}Login - DoctorDoctor{% endblock %}
+{% block title_in_li %}Login{% endblock %}
+
+{% block inner_page %}
+<h1>Login!</h1>
+<form method="POST" action>
+	{% csrf_token %}
+	<label for="email">Email Address:</label>
+	<input type="text" name="email" placeholder="Email Address">
+	<br>
+	<label for="password">Password:</label>
+	<input type="password" name="password">
+	<br>
+	<input type="submit" class="btn btn-danger" value="Login">
+	<br>
+	<a href="{% url 'accounts:signup' %}">Not registered yet! Sign Up Now!</a>
+</form>
+{% endblock %}
