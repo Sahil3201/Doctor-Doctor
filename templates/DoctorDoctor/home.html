@@ -1,11 +1,914 @@
+home.html
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>IPGM Project</title>
+    <meta content="" name="descriptison">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    {#<link href="{% static 'DoctorDoctor/assets/img/favicon.png' %}" rel="icon"> #}
+    <link href="{% static 'DoctorDoctor/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'DoctorDoctor/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'DoctorDoctor/assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+    <link href="{% static 'DoctorDoctor/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'DoctorDoctor/assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'DoctorDoctor/assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}"
+        rel="stylesheet">
+    <link href="{% static 'DoctorDoctor/assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+    <link href="{% static 'DoctorDoctor/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{% static 'DoctorDoctor/assets/css/style.css' %}" rel="stylesheet">
 </head>
+
 <body>
-    Hello
+
+    <!-- ======= Top Bar ======= -->
+    <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <i class="icofont-clock-time"></i>24x7 at your service
+            </div>
+            <div class="d-flex align-items-center">
+                <i class="icofont-phone"></i> Call us now +91 98652147862
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <h1 class="logo mr-auto"><a href="index.html">Doctor-Doctor</a></h1>
+
+            <nav class="nav-menu d-none d-lg-block">
+                <ul>
+                    <li class="active"><a href="index.html">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#departments">Departments</a></li>
+                    <li><a href="#doctors">Doctors</a></li>
+                    <!-- <li class="drop-down"><a href="">Drop Down</a>
+          <ul>
+            <li><a href="#">Drop Down 1</a></li>
+            <li class="drop-down"><a href="#">Deep Drop Down</a>
+              <ul>
+                <li><a href="#">Deep Drop Down 1</a></li>
+                <li><a href="#">Deep Drop Down 2</a></li>
+                <li><a href="#">Deep Drop Down 3</a></li>
+                <li><a href="#">Deep Drop Down 4</a></li>
+                <li><a href="#">Deep Drop Down 5</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Drop Down 2</a></li>
+            <li><a href="#">Drop Down 3</a></li>
+            <li><a href="#">Drop Down 4</a></li>
+          </ul>
+        </li> -->
+                    <li><a href="#contact">Contact</a></li>
+
+                </ul>
+            </nav><!-- .nav-menu -->
+
+            <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make
+                    an</span>Appointment</a>
+
+        </div>
+    </header><!-- End Header -->
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero">
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+
+            <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+            <div class="carousel-inner" role="listbox">
+
+                <!-- Slide 1 -->
+                <div class="carousel-item active"
+                    style="background-image: url('{% static 'DoctorDoctor/assets/img/beats.jpg' %}')" />
+                <div class="container">
+                    <h2>Welcome to <span>We Care</span></h2>
+                    <p>We connect you to the world's best doctors for your healthy living.</p>
+                    {# <a href="#about" class="btn-get-started scrollto">Read More</a> #}
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item"
+                style="background-image: url('{% static 'DoctorDoctor/assets/img/list.jpg' %}')" />
+            <div class="container">
+                <h2>Your records are safe with us</h2>
+                <p>Did you forgot where you kept your past prescription list and reports , don't worry because
+                    at We Care we
+                    do it for you by keeping all your necessary records safe and secure.</p>
+                {# <a href="#about" class="btn-get-started scrollto">Read More</a> #}
+            </div>
+        </div>
+
+
+
+        </div>
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon icofont-simple-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon icofont-simple-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+
+        </div>
+    </section><!-- End Hero -->
+
+    <main id="main">
+
+        <!-- ======= Featured Services Section ======= -->
+        <section id="featured-services" class="featured-services">
+            <div class="container" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>Best Features</h2>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                            <div class="icon"><i class="icofont-brainstorming"></i></div>
+                            <h4 class="title"><a href="">Connect with Psychology</a></h4>
+                            <p class="description">Our best PsyD help you to understand your health Psychology and keeps
+                                you healthy.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+                            <div class="icon"><i class="icofont-food-basket"></i></div>
+                            <h4 class="title"><a href="">Diet and Exercise </a></h4>
+                            <p class="description">Our Nutritionists and trainers helps you to keep your body fit all
+                                the time. </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+                            <div class="icon"><i class="icofont-doctor"></i></div>
+                            <h4 class="title"><a href="">24x7 Availability</a></h4>
+                            <p class="description">At We Care we have all types of specialist doctors that are available
+                                24x7 for you.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+                            <div class="icon"><i class="icofont-check"></i></div>
+                            <h4 class="title"><a href="">Disease checker</a></h4>
+                            <p class="description">Answer few questions and get your disease check.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Featured Services Section -->
+
+        <!-- ======= Cta Section ======= -->
+        <section id="cta" class="cta">
+            <div class="container" data-aos="zoom-in">
+
+                <div class="text-center">
+                    <h3>In an emergency? Need help now?</h3>
+                    <p> Make an Appointment our experts will connect with you soon.</p>
+                    <a class="cta-btn scrollto" href="#appointment">Make an Appointment</a>
+                </div>
+
+            </div>
+        </section><!-- End Cta Section -->
+
+        <!-- ======= About Us Section ======= -->
+        <section id="about" class="about">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>About Us</h2>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <img src="{% static 'DoctorDoctor/assets/img/about1.jpg' %}" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
+                        <h3>We care about your health</h3>
+                        <p class="font-italic">
+                            We are IT enginners at Dwarkadas J Sanghvi college of Engineering , during our 5th semester
+                            we came out
+                            with this idea of connecting specialist doctors and patients online,so we designed and
+                            developed this
+                            project.
+                        </p>
+                        <h3>Our Main Aim : </h3>
+                        <ul>
+                            <li><i class="icofont-check-circled"></i>To connect patients with best doctors of our
+                                country to get
+                                recovery soon and quality health tips </li>
+                            <li><i class="icofont-check-circled"></i>To keep records of patients prescription list and
+                                reports.Because
+                                now-a-days many people misplace them.</li>
+
+                        </ul>
+
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End About Us Section -->
+
+        <!-- ======= Services Section ======= -->
+        <section id="services" class="services services">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Services</h2>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="icon"><i class="icofont-connection"></i></div>
+                        <h4 class="title"><a href="">Special Care</a></h4>
+                        <p class="description">Once you get in touch with us we wont let you suffer.Our team will get in
+                            touch with
+                            you via call or sometimes personal visit and provide you best health tips.</p>
+                    </div>
+                    <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="icon"><i class="icofont-laboratory"></i></div>
+                        <h4 class="title"><a href="">Research Labs</a></h4>
+                        <p class="description">In Mumbai Our Research and Development Lab work is in progress once we
+                            are done you
+                            dont need to go to different labs for report work all kind of report facilities will be
+                            available here.
+                        </p>
+                    </div>
+                    <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="icon"><i class="icofont-home"></i></div>
+                        <h4 class="title"><a href="">Home visit</a></h4>
+                        <p class="description">If you want to make an appointment for home visit you can easily make
+                            here in make an
+                            appointment section.</p>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </section><!-- End Services Section -->
+
+        <!-- ======= Appointment Section ======= -->
+        <section id="appointment" class="appointment section-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Make an Appointment</h2>
+                    <p>Make an appointment today and connect with the specialists.</p>
+                </div>
+
+                <form action="forms/appointment.php" method="post" role="form" class="php-email-form" data-aos="fade-up"
+                    data-aos-delay="100">
+                    <div class="form-row">
+                        <div class="col-md-4 form-group">
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
+                                data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                            <div class="validate"></div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"
+                                data-rule="email" data-msg="Please enter a valid email">
+                            <div class="validate"></div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <input type="tel" class="form-control" name="phone" id="phone" placeholder="Your Phone"
+                                data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                            <div class="validate"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 form-group">
+                            <input type="datetime" name="date" class="form-control datepicker" id="date"
+                                placeholder="Appointment Date" data-rule="minlen:4"
+                                data-msg="Please enter at least 4 chars">
+                            <div class="validate"></div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <select name="department" id="department" class="form-control">
+                                <option value="">Select Department</option>
+                                <option value="Department 1">Department 1</option>
+                                <option value="Department 2">Department 2</option>
+                                <option value="Department 3">Department 3</option>
+                            </select>
+                            <div class="validate"></div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <select name="doctor" id="doctor" class="form-control">
+                                <option value="">Select Doctor</option>
+                                <option value="Doctor 1">Doctor 1</option>
+                                <option value="Doctor 2">Doctor 2</option>
+                                <option value="Doctor 3">Doctor 3</option>
+                            </select>
+                            <div class="validate"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea class="form-control" name="message" rows="5"
+                            placeholder="Message (Optional)"></textarea>
+                        <div class="validate"></div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="loading">Loading</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
+                    </div>
+                    <div class="text-center"><button type="submit">Make an Appointment</button></div>
+                </form>
+
+            </div>
+        </section><!-- End Appointment Section -->
+
+        <!-- ======= Departments Section ======= -->
+        <section id="departments" class="departments">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Departments</h2>
+                    <p>We have Specialists in majorly all the departments.Have a look on some departments. </p>
+                </div>
+
+                <div class="row" data-aos="fade-up" data-aos-delay="100">
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <ul class="nav nav-tabs flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active show" data-toggle="tab" href="#tab-1">
+                                    <h4>Cardiology</h4>
+
+                                </a>
+                            </li>
+                            <li class="nav-item mt-2">
+                                <a class="nav-link" data-toggle="tab" href="#tab-2">
+                                    <h4>Neurology</h4>
+
+                                </a>
+                            </li>
+                            <li class="nav-item mt-2">
+                                <a class="nav-link" data-toggle="tab" href="#tab-3">
+                                    <h4>Hepatology</h4>
+
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="tab-content">
+                            <div class="tab-pane active show" id="tab-1">
+                                <h3>Cardiology</h3>
+                                <img src="{% static 'DoctorDoctor/assets/img/departments-1.jpg' %}" alt=""
+                                    class="img-fluid">
+                                <p>Cardiology is a branch of medicine that deals with the disorders of the heart as well
+                                    as some parts
+                                    of the circulatory system. The field includes medical diagnosis and treatment of
+                                    congenital heart
+                                    defects, coronary artery disease, heart failure, valvular heart disease and
+                                    electrophysiology.
+                                    Physicians who specialize in this field of medicine are called cardiologists, a
+                                    specialty of internal
+                                    medicine</p>
+                            </div>
+                            <div class="tab-pane" id="tab-2">
+                                <h3>Neurology</h3>
+                                <img src="{% static 'DoctorDoctor/assets/img/departments-2.jpg' %}" alt=""
+                                    class="img-fluid">
+                                    <p>Neurology is a branch of medicine dealing with disorders of the nervous system.
+                                        Neurology deals with
+                                        the diagnosis and treatment of all categories of conditions and disease involving
+                                        the central and
+                                        peripheral nervous systems (and their subdivisions, the autonomic and somatic
+                                        nervous systems),
+                                        including their coverings, blood vessels, and all effector tissue, such as muscle.[
+                                    </p>
+                            </div>
+                            <div class="tab-pane" id="tab-3">
+                                <h3>Hepatology</h3>
+                                <img src="{% static 'DoctorDoctor/assets/img/departments-3.jpg' %}" alt=""
+                                    class="img-fluid">
+                                    <img src="{% static 'DoctorDoctor/assets/img/departments-3.jpg' %}" alt="" class="img-fluid">
+                                    <p>Hepatology is the branch of medicine that incorporates the study of liver,
+                                        gallbladder, biliary tree,
+                                        and pancreas as well as management of their disorders. Although traditionally
+                                        considered a
+                                        sub-specialty of gastroenterology, rapid expansion has led in some countries to
+                                        doctors specializing
+                                        solely on this area, who are called hepatologists.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End Departments Section -->
+        {% comment %}
+
+        <!-- ======= Testimonials Section =======
+        <section id="testimonials" class="testimonials">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Testimonials</h2>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
+                        sint
+                        consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea.
+                        Quia fugiat sit
+                        in iste officiis commodi quidem hic quas.</p>
+                </div>
+
+                <div class="owl-carousel testimonials-carousel" data-aos="fade-up" data-aos-delay="100">
+
+                    <div class="testimonial-item">
+                        <p>
+                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                            Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus.
+                            Accusantium
+                            quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                        </p>
+                        <img src="{% static 'DoctorDoctor/assets/img/testimonials/testimonials-1.jpg' %}"
+                            class="testimonial-img" alt="">
+                        <h3>Ritik Sanghvi</h3>
+                        <h4>Ceo &amp; Founder</h4>
+                    </div>
+
+                    <div class="testimonial-item">
+                        <p>
+                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                            Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum
+                            eram malis
+                            quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+                            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                        </p>
+                        <img src="{% static 'DoctorDoctor/assets/img/testimonials/testimonials-2.jpg' %}"
+                            class="testimonial-img" alt="">
+                        <h3>Sahil Lunawat</h3>
+                        <h4>Managing Director</h4>
+                    </div>
+
+                    <div class="testimonial-item">
+                        <p>
+                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                            Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis
+                            minim tempor
+                            labore quem eram duis noster aute amet eram fore quis sint minim.
+                            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                        </p>
+                        <img src="{% static 'DoctorDoctor/assets/img/testimonials/testimonials-3.jpg' %}"
+                            class="testimonial-img" alt="">
+                        <h3>Rishabh Nevatia</h3>
+                        <h4>Common man</h4>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>
+                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                            Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis
+                            minim tempor
+                            labore quem eram duis noster aute amet eram fore quis sint minim.
+                            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                        </p>
+                        <img src="{% static 'DoctorDoctor/assets/img/testimonials/testimonials-3.jpg' %}"
+                            class="testimonial-img" alt="">
+                        <h3>Rishabh Nevatia</h3>
+                        <h4>Designer</h4>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>
+                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                            Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis
+                            minim tempor
+                            labore quem eram duis noster aute amet eram fore quis sint minim.
+                            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                        </p>
+                        <img src="{% static 'DoctorDoctor/assets/img/testimonials/testimonials-3.jpg' %}"
+                            class="testimonial-img" alt="">
+                        <h3>Rishabh Nevatia</h3>
+                        <h4>Freelancer</h4>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </section> End Testimonials Section -->
+
+        <!-- ======= Doctors Section =======
+        <section id="doctors" class="doctors section-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Doctors</h2>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
+                        sint
+                        consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea.
+                        Quia fugiat sit
+                        in iste officiis commodi quidem hic quas.</p>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member" data-aos="fade-up" data-aos-delay="100">
+                            <div class="member-img">
+                                <img src="{% static 'DoctorDoctor/assets/img/doctors/doctors-1.jpg' %}"
+                                    class="img-fluid" alt="">
+                                <div class="social">
+                                    <a href=""><i class="icofont-twitter"></i></a>
+                                    <a href=""><i class="icofont-facebook"></i></a>
+                                    <a href=""><i class="icofont-instagram"></i></a>
+                                    <a href=""><i class="icofont-linkedin"></i></a>
+                                </div>
+                            </div>
+                            <div class="member-info">
+                                <h4>Walter White</h4>
+                                <span>Chief Medical Officer</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member" data-aos="fade-up" data-aos-delay="200">
+                            <div class="member-img">
+                                <img src="{% static 'DoctorDoctor/assets/img/doctors/doctors-2.jpg' %}"
+                                    class="img-fluid" alt="">
+                                <div class="social">
+                                    <a href=""><i class="icofont-twitter"></i></a>
+                                    <a href=""><i class="icofont-facebook"></i></a>
+                                    <a href=""><i class="icofont-instagram"></i></a>
+                                    <a href=""><i class="icofont-linkedin"></i></a>
+                                </div>
+                            </div>
+                            <div class="member-info">
+                                <h4>Sarah Jhonson</h4>
+                                <span>Anesthesiologist</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member" data-aos="fade-up" data-aos-delay="300">
+                            <div class="member-img">
+                                <img src="{% static 'DoctorDoctor/assets/img/doctors/doctors-3.jpg' %}"
+                                    class="img-fluid" alt="">
+                                <div class="social">
+                                    <a href=""><i class="icofont-twitter"></i></a>
+                                    <a href=""><i class="icofont-facebook"></i></a>
+                                    <a href=""><i class="icofont-instagram"></i></a>
+                                    <a href=""><i class="icofont-linkedin"></i></a>
+                                </div>
+                            </div>
+                            <div class="member-info">
+                                <h4>William Anderson</h4>
+                                <span>Cardiology</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member" data-aos="fade-up" data-aos-delay="400">
+                            <div class="member-img">
+                                <img src="{% static 'DoctorDoctor/assets/img/doctors/doctors-4.jpg' %}"
+                                    class="img-fluid" alt="">
+                                <div class="social">
+                                    <a href=""><i class="icofont-twitter"></i></a>
+                                    <a href=""><i class="icofont-facebook"></i></a>
+                                    <a href=""><i class="icofont-instagram"></i></a>
+                                    <a href=""><i class="icofont-linkedin"></i></a>
+                                </div>
+                            </div>
+                            <div class="member-info">
+                                <h4>Amanda Jepson</h4>
+                                <span>Neurosurgeon</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section> End Doctors Section -->
+
+        <!-- ======= Gallery Section =======
+        <section id="gallery" class="gallery">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Gallery</h2>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
+                        sint
+                        consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea.
+                        Quia fugiat sit
+                        in iste officiis commodi quidem hic quas.</p>
+                </div>
+
+                <div class="owl-carousel gallery-carousel" data-aos="fade-up" data-aos-delay="100">
+                    <a href="{% static 'DoctorDoctor/assets/img/gallery/gallery-1.jpg' %}" class="venobox"
+                        data-gall="gallery-carousel"><img
+                            src="{% static 'DoctorDoctor/assets/img/gallery/gallery-1.jpg' %}" alt=""></a>
+                    <a href="{% static 'DoctorDoctor/assets/img/gallery/gallery-2.jpg' %}" class="venobox"
+                        data-gall="gallery-carousel"><img
+                            src="{% static 'DoctorDoctor/assets/img/gallery/gallery-2.jpg' %}" alt=""></a>
+                    <a href="{% static 'DoctorDoctor/assets/img/gallery/gallery-3.jpg' %}" class="venobox"
+                        data-gall="gallery-carousel"><img
+                            src="{% static 'DoctorDoctor/assets/img/gallery/gallery-3.jpg' %}" alt=""></a>
+                    <a href="{% static 'DoctorDoctor/assets/img/gallery/gallery-4.jpg' %}" class="venobox"
+                        data-gall="gallery-carousel"><img
+                            src="{% static 'DoctorDoctor/assets/img/gallery/gallery-4.jpg' %}" alt=""></a>
+                    <a href="{% static 'DoctorDoctor/assets/img/gallery/gallery-5.jpg' %}" class="venobox"
+                        data-gall="gallery-carousel"><img
+                            src="{% static 'DoctorDoctor/assets/img/gallery/gallery-5.jpg' %}" alt=""></a>
+                    <a href="{% static 'DoctorDoctor/assets/img/gallery/gallery-6.jpg' %}" class="venobox"
+                        data-gall="gallery-carousel"><img
+                            src="{% static 'DoctorDoctor/assets/img/gallery/gallery-6.jpg' %}" alt=""></a>
+                    <a href="{% static 'DoctorDoctor/assets/img/gallery/gallery-7.jpg' %}" class="venobox"
+                        data-gall="gallery-carousel"><img
+                            src="{% static 'DoctorDoctor/assets/img/gallery/gallery-7.jpg' %}" alt=""></a>
+                    <a href="{% static 'DoctorDoctor/assets/img/gallery/gallery-8.jpg' %}" class="venobox"
+                        data-gall="gallery-carousel"><img
+                            src="{% static 'DoctorDoctor/assets/img/gallery/gallery-8.jpg' %}" alt=""></a>
+                </div>
+
+            </div>
+        </section> End Gallery Section -->
+
+        {% endcomment %}
+
+        <!-- ======= Frequently Asked Questioins Section ======= -->
+        <section id="faq" class="faq section-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Latest News</h2>
+                </div>
+
+                <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">
+
+                    <li>
+                        <a data-toggle="collapse" class="" href="#faq1">Vitamin D deficiency may predict COVID-19
+                            seroconversion <i class="icofont-simple-up"></i></a>
+                        <div id="faq1" class="collapse show" data-parent=".faq-list">
+                            <p>
+                                A recent study published on the preprint server medRxiv* in October 2020 reports the
+                                potential
+                                contribution of vitamin D deficiency to an increased risk of COVID-19 in a subset of
+                                health care workers
+                                in the UK.
+                            </p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a data-toggle="collapse" href="#faq2" class="collapsed">Feugiat scelerisque varius morbi enim
+                            nunc faucibus
+                            a pellentesque? <i class="icofont-simple-up"></i></a>
+                        <div id="faq2" class="collapse" data-parent=".faq-list">
+                            <p>
+                                A large, international study of COVID-19 patients confirmed that cardiovascular disease,
+                                hypertension,
+                                diabetes, congestive heart failure, chronic kidney disease, stroke and cancer can
+                                increase a patient's
+                                risk of dying from the virus.
+                            </p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a data-toggle="collapse" href="#faq3" class="collapsed">Researchers hope to develop an
+                            effective COVID-19
+                            vaccine using bovine adenovirus <i class="icofont-simple-up"></i></a>
+                        <div id="faq3" class="collapse" data-parent=".faq-list">
+                            <p>
+                                A researcher in Penn State's College of Agricultural Sciences is part of a team of
+                                scientists working to
+                                develop a unique COVID-19 vaccine that uses a bovine adenovirus as a safe and effective
+                                delivery
+                                vehicle.
+                            </p>
+                        </div>
+                    </li>
+
+
+
+                </ul>
+
+            </div>
+        </section><!-- End Frequently Asked Questioins Section -->
+
+        <!-- ======= Contact Section ======= -->
+        <section id="contact" class="contact">
+            <div class="container">
+
+                <div class="section-title">
+                    <h2>Contact</h2>
+                    <p>Feel free to contact us anytime.</p>
+                </div>
+
+            </div>
+
+            <div>
+                <iframe style="border:0; width: 100%; height: 350px;"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.0125379834635!2d72.83491871485181!3d19.10710588706999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9c676018b43%3A0x75f29a4205098f99!2sDwarkadas%20Jivanlal%20Sanghvi%20College%20of%20Engineering!5e0!3m2!1sen!2sin!4v1602149001527!5m2!1sen!2sin"
+                    width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+                    tabindex="0"></iframe>
+            </div>
+
+            <div class="container">
+
+                <div class="row mt-5">
+
+                    <div class="col-lg-6">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="info-box">
+                                    <i class="bx bx-map"></i>
+                                    <h3>Our Address</h3>
+                                    <p>DJ Sanghvi College, Vile Parle, Mumbai 500101</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-box mt-4">
+                                    <i class="bx bx-envelope"></i>
+                                    <h3>Email Us</h3>
+                                    <p>info@example.com<br>contact@example.com</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-box mt-4">
+                                    <i class="bx bx-phone-call"></i>
+                                    <h3>Call Us</h3>
+                                    <p>+91 5589 55488 55<br>+91 6678 254445 41</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6">
+                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <input type="text" name="name" class="form-control" id="name"
+                                        placeholder="Your Name" data-rule="minlen:4"
+                                        data-msg="Please enter at least 4 chars" />
+                                    <div class="validate"></div>
+                                </div>
+                                <div class="col form-group">
+                                    <input type="email" class="form-control" name="email" id="email"
+                                        placeholder="Your Email" data-rule="email"
+                                        data-msg="Please enter a valid email" />
+                                    <div class="validate"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="subject" id="subject"
+                                    placeholder="Subject" data-rule="minlen:4"
+                                    data-msg="Please enter at least 8 chars of subject" />
+                                <div class="validate"></div>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="message" rows="5" data-rule="required"
+                                    data-msg="Please write something for us" placeholder="Message"></textarea>
+                                <div class="validate"></div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="loading">Loading</div>
+                                <div class="error-message"></div>
+                                <div class="sent-message">Your message has been sent. Thank you!</div>
+                            </div>
+                            <div class="text-center"><button type="submit">Send Message</button></div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Contact Section -->
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-info">
+                            <h3>We Care</h3>
+                            <p>
+                                DJ Sanghvi College <br>
+                                Mumbai 500101,Mumbai<br><br>
+                                <strong>Phone:</strong> +91 5589 55488 55<br>
+                                <strong>Email:</strong> info@example.com<br>
+                            </p>
+                            <div class="social-links mt-3">
+                                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+
+
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Our Newsletter</h4>
+                        <p>Subscribe our newsletter to get latest updates and tips </p>
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>We Care</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+
+                Designed by <a href="">Ritik,Sahil and Rishabh </a>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'DoctorDoctor/assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'DoctorDoctor/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'DoctorDoctor/assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'DoctorDoctor/assets/vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'DoctorDoctor/assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'DoctorDoctor/assets/vendor/counterup/counterup.min.js' %}"></script>
+    <script src="{% static 'DoctorDoctor/assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'DoctorDoctor/assets/vendor/venobox/venobox.min.js' %}"></script>
+    <script src="{% static 'DoctorDoctor/assets/vendor/aos/aos.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'DoctorDoctor/assets/js/main.js' %}"></script>
+
 </body>
+
 </html>
