@@ -136,4 +136,14 @@ STATICFILES_DIRS = [STATIC_DIR,]
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
+# Email setting
+#DataFlair
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'doctordoctor3201@gmail.com'
+EMAIL_HOST_PASSWORD = 'doctor3201'
+
+
 django_heroku.settings(locals())

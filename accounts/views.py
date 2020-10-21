@@ -26,6 +26,7 @@ def user_signup(request):
                 user = user_form.save(commit=False)
                 user.set_password(user.password)
                 user.save()
+                welcome_email(user.email)
 
                 registered = True
                 login(request, user)
@@ -66,3 +67,16 @@ def profile(request):
         return render(request, 'accounts/profile.html')
     else:
         return HttpResponseRedirect(reverse('accounts:login'))
+
+# Email
+from DoctorDoctor.settings import EMAIL_HOST_USER
+from django.core.mail import send_mail
+from django.utils.html import strip_tags
+from django.template.loader import render_to_string
+def welcome_email(email):
+    subject = 'Verify your DoctorDoctor account'
+    message = 'Hope you are enjoying your Django Tutorials'
+    html_message = render_to_string('accounts/mail_template.html', {'email': email})
+    recepient = email
+    send_mail(subject, message, EMAIL_HOST_USER, [recepient], fail_silently = False,html_message=html_message)
+    return HttpResponseRedirect(reverse('home'))

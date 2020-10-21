@@ -23,18 +23,19 @@ class CustomUserManager(BaseUserManager):
 
 ##User:
 class CustomUser(AbstractUser):
-	id = models.AutoField(primary_key=True)
-	username = models.CharField(max_length=255,blank=True)
-	name = models.CharField(blank=True,null=True,max_length=255)
-	surname = models.CharField(blank=True,null=True,max_length=255)
+	id 				= models.AutoField(primary_key=True)
+	username 		= models.CharField(max_length=255,blank=True)
+	name 			= models.CharField(blank=True,null=True,max_length=255)
+	surname 		= models.CharField(blank=True,null=True,max_length=255)
 
-	password = models.CharField(max_length=255)
-	email = models.EmailField(max_length=254,unique=True)
-	phone_number = models.IntegerField(blank=True,null=True)
-	date_created = models.DateField(auto_now=True,editable=False)
+	is_doctor 		= models.BooleanField(default=False)
+	password 		= models.CharField(max_length=255)
+	email 			= models.EmailField(max_length=254,unique=True)
+	phone_number 	= models.IntegerField(blank=True,null=True)
+	date_created	= models.DateField(auto_now=True,editable=False)
 
-	is_active = models.BooleanField(default=True)
-	is_admin = models.BooleanField(default=False)
+	is_active 		= models.BooleanField(default=True)
+	is_admin 		= models.BooleanField(default=False)
 
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = []
