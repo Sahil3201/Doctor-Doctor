@@ -11,7 +11,7 @@ class CustomUserForm(forms.ModelForm):
     password = forms.CharField(required=True,
                                widget=forms.PasswordInput(),)
     email = forms.EmailField(required=True,)
-    is_doctor = forms.BooleanField(label="Are you a doctor?")
+    is_doctor = forms.BooleanField(required=False,label="Are you a doctor?")
 
     class Meta:
         fields = ('email', 'password','is_doctor')
