@@ -28,7 +28,7 @@ class CustomUser(AbstractUser):
 	name 			= models.CharField(blank=True,null=True,max_length=255)
 	surname 		= models.CharField(blank=True,null=True,max_length=255)
 
-	is_doctor 		= models.BooleanField(default=False)
+	is_doctor 		= models.BooleanField(default=False,blank=True,null=True)
 	password 		= models.CharField(max_length=255)
 	email 			= models.EmailField(max_length=254,unique=True)
 	phone_number 	= models.IntegerField(blank=True,null=True)
