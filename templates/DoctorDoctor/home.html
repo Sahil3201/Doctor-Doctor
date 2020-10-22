@@ -24,8 +24,7 @@
     <link href="{% static 'DoctorDoctor/assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
     <link href="{% static 'DoctorDoctor/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
     <link href="{% static 'DoctorDoctor/assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
-    <link href="{% static 'DoctorDoctor/assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}"
-        rel="stylesheet">
+    <link href="{% static 'DoctorDoctor/assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
     <link href="{% static 'DoctorDoctor/assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
     <link href="{% static 'DoctorDoctor/assets/vendor/aos/aos.css' %}" rel="stylesheet">
 
@@ -79,7 +78,13 @@
             <li><a href="#">Drop Down 4</a></li>
           </ul>
         </li> -->
-                    <li><a href="#contact">Contact</a></li>
+                    <li>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'accounts:logout' %}">{{user.email}}</a>
+                        {% else %}
+                        <a href="{% url 'accounts:login' %}">LOGIN</a>
+                        {% endif %}
+                    </li>
 
                 </ul>
             </nav><!-- .nav-menu -->
@@ -409,27 +414,28 @@
                                 <h3>Neurology</h3>
                                 <img src="{% static 'DoctorDoctor/assets/img/departments-2.jpg' %}" alt=""
                                     class="img-fluid">
-                                    <p>Neurology is a branch of medicine dealing with disorders of the nervous system.
-                                        Neurology deals with
-                                        the diagnosis and treatment of all categories of conditions and disease involving
-                                        the central and
-                                        peripheral nervous systems (and their subdivisions, the autonomic and somatic
-                                        nervous systems),
-                                        including their coverings, blood vessels, and all effector tissue, such as muscle.[
-                                    </p>
+                                <p>Neurology is a branch of medicine dealing with disorders of the nervous system.
+                                    Neurology deals with
+                                    the diagnosis and treatment of all categories of conditions and disease involving
+                                    the central and
+                                    peripheral nervous systems (and their subdivisions, the autonomic and somatic
+                                    nervous systems),
+                                    including their coverings, blood vessels, and all effector tissue, such as muscle.[
+                                </p>
                             </div>
                             <div class="tab-pane" id="tab-3">
                                 <h3>Hepatology</h3>
                                 <img src="{% static 'DoctorDoctor/assets/img/departments-3.jpg' %}" alt=""
                                     class="img-fluid">
-                                    <img src="{% static 'DoctorDoctor/assets/img/departments-3.jpg' %}" alt="" class="img-fluid">
-                                    <p>Hepatology is the branch of medicine that incorporates the study of liver,
-                                        gallbladder, biliary tree,
-                                        and pancreas as well as management of their disorders. Although traditionally
-                                        considered a
-                                        sub-specialty of gastroenterology, rapid expansion has led in some countries to
-                                        doctors specializing
-                                        solely on this area, who are called hepatologists.</p>
+                                <img src="{% static 'DoctorDoctor/assets/img/departments-3.jpg' %}" alt=""
+                                    class="img-fluid">
+                                <p>Hepatology is the branch of medicine that incorporates the study of liver,
+                                    gallbladder, biliary tree,
+                                    and pancreas as well as management of their disorders. Although traditionally
+                                    considered a
+                                    sub-specialty of gastroenterology, rapid expansion has led in some countries to
+                                    doctors specializing
+                                    solely on this area, who are called hepatologists.</p>
                             </div>
                         </div>
                     </div>
