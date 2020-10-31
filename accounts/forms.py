@@ -43,7 +43,7 @@ class make_appointment_form(forms.ModelForm):
     day1 = DateField(widget=AdminDateWidget)
     day2 = DateField(widget=AdminDateWidget)
     day3 = DateField(widget=AdminDateWidget)
-    patient = forms.CharField(widget=forms.HiddenInput())
+    # patient = forms.CharField(widget=forms.HiddenInput())
     class Meta:
         model = Appointment
-        fields = ('doctor','day1','day2','day3','patient')
+        fields = ('doctor','day1','day2','day3',)#'patient')

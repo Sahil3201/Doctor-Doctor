@@ -103,12 +103,13 @@ class Doctor(CustomUser):
         verbose_name = 'User: Doctor'
 
 class Appointment(models.Model):
-    doctor      = models.ForeignKey(Doctor,related_name='appointment_doctor',on_delete=models.CASCADE)
-    patient     = models.ForeignKey(Patient,related_name='appointment_patient',on_delete=models.CASCADE,null=True)
-    day1         = models.DateField(blank=True, editable=True,null=True)
-    day2         = models.DateField(blank=True, editable=True,null=True)
-    day3         = models.DateField(blank=True, editable=True,null=True)
-
+    doctor          = models.ForeignKey(Doctor,related_name='appointment_doctor',on_delete=models.CASCADE)
+    patient         = models.ForeignKey(Patient,related_name='appointment_patient',on_delete=models.CASCADE,null=True)
+    day1            = models.DateField(blank=True, editable=True,null=True)
+    day2            = models.DateField(blank=True, editable=True,null=True)
+    day3            = models.DateField(blank=True, editable=True,null=True)
+    approved_for    = models.DateField(blank=True, editable=True,null=True)
+    
     class Meta:
         verbose_name = 'Appointment'
     def __str__(self):
