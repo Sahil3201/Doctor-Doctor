@@ -108,7 +108,7 @@ class Appointment(models.Model):
     day1            = models.DateField(blank=True, editable=True,null=True)
     day2            = models.DateField(blank=True, editable=True,null=True)
     day3            = models.DateField(blank=True, editable=True,null=True)
-    approved_for    = models.DateField(blank=True, editable=True,null=True)
+    approved_for    = models.CharField(blank=True, editable=True,null=True, max_length=10)
     
     class Meta:
         verbose_name = 'Appointment'

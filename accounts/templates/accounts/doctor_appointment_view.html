@@ -1,0 +1,17 @@
+{% extends "DoctorDoctor/base.html" %}
+
+{% block title_page %}Profile{% endblock %}
+{% block title %}Profile - DoctorDoctor{% endblock %}
+{% block title_in_li %}Profile{% endblock %}
+
+{% block inner_page %}
+<form method="POST">
+{% csrf_token %}
+patient: {{ap.patient}}<br>
+day1: {{ap.day1}}<br>
+day2: {{ap.day2}}<br>
+day3: {{ap.day3}}<br>
+Approved for: {{form.approved_for}} <br>
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

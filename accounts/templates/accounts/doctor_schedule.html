@@ -1,0 +1,20 @@
+{% extends "DoctorDoctor/base.html" %}
+
+{% block title_page %}Schedule{% endblock %}
+{% block title %}Schedule - DoctorDoctor{% endblock %}
+{% block title_in_li %}Schedule{% endblock %}
+
+{% block inner_page %}
+Here is the schedule 
+<ol>
+    {% for a in schedule %}
+    <li>
+        Doc: {{a.doctor}}<br>
+        {{a.day1}}<br>
+        {{a.day2}}<br>
+        {{a.day3}}<br>
+        <a href="{% url 'accounts:detail_appointment' id=a.id %}">h</a>
+    </li>
+    {% endfor %}
+</ol>
+{% endblock %}

@@ -23,7 +23,7 @@ app_name = "home"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/',include('accounts.urls',namespace='accounts')),
+    path('',include('accounts.urls',namespace='accounts')),
     path('', views.home, name="home"),
     path('departments/', views.departments.as_view(), name='departments'),
     url(r'^doctors/$',v.list_doctors.as_view(),name='list_doctors'),

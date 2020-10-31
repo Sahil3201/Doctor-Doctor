@@ -147,12 +147,22 @@ class make_appointment(PermissionRequiredMixin, CreateView):
         print(form)
         return super().form_invalid(form)
 
-class see_schedule(ListView, LoginRequiredMixin):
-    # permission_required = 'doctors.see_'
+class see_schedule(PermissionRequiredMixin, ListView):
+    permission_required = 'accounts.view_appointment'
 
     model = Appointment
+    template_name = 'accounts/doctor_schedule.html'
+    context_object_name = 'schedule'
 
     def get_queryset(self):
         queryset = super().get_queryset()
         queryset = Appointment.objects.filter(doctor=self.request.user)
         return queryset
+
+class detail_appointment(PermissionRequiredMixin, UpdateView):
+    permission_required = 'accounts.view_appointment'
+
+    model = Appointment
+    form_class = approve_appointment
+    template_name = 'accounts/doctor_appointment_view.html'
+    context_object_name = 'ap'
