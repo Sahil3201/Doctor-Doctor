@@ -5,7 +5,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from .models import CustomUser
+from .models import *
 
 class CustomUserCreationForm(forms.ModelForm):
 	password1 = forms.CharField(label = 'Password',widget = forms.PasswordInput)
@@ -53,7 +53,7 @@ class CustomUserAdmin(BaseUserAdmin):
 	fieldsets = (
 		(None,{'fields': ('email','password')}),
 		('Personal info',{'fields':('fullname',)}),
-		# ('Other info',{'fields':('date_created',)}),
+		('Other info',{'fields':('is_doctor',)}),
 		('Permissions',{'fields':('is_admin','is_active','is_staff'),}),
 		)
 
@@ -68,5 +68,10 @@ class CustomUserAdmin(BaseUserAdmin):
 	ordering = ('email',)
 	filter_horizontal = ()
 
-admin.site.register(CustomUser,CustomUserAdmin)
+# admin.site.register(CustomUser,CustomUserAdmin)
+admin.site.register(Patient)
+admin.site.register(Doctor)
+admin.site.register(Appointment)
+admin.site.register(Medicines)
+admin.site.register(CustomUser)
 admin.site.unregister(Group)

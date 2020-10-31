@@ -1,0 +1,42 @@
+{% extends "DoctorDoctor/base.html" %}
+{% load static %}
+
+{% block title_page %}Update Profile{% endblock %}
+{% block title %}Update Profile - DoctorDoctor{% endblock %}
+{% block title_in_li %}Update Profile{% endblock %}
+
+{% block css_section %}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}" />
+{% comment %}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
+{% endcomment %}
+{% endblock %}
+{% block inner_page %}
+<form method="POST">
+    {% csrf_token %}
+    Allergies: {{form.allergies}}<br>
+    fullname: {{form.fullname}}<br>
+    date_of_birth: {{form.date_of_birth}}<br>
+    phone_number: {{form.phone_number}}<br>
+    blood_group: {{form.blood_group}}<br>
+    marital_status: {{form.marital_status}}<br>
+    emergency_Name: {{form.emergency_Name}}<br>
+    emergency_phone_number: {{form.emergency_phone_number}}<br>
+    emergency_relationship: {{form.emergency_relationship}}<br>
+    insurance_id: {{form.insurance_id}}<br>
+    insurance_company: {{form.insurance_company}}<br>
+    insurance_validity: {{form.insurance_validity}}<br>
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
+{% block js_section %}
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<script type="text/javascript" src="/static/admin/js/core.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js">        </script>
+<script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+<script type="text/javascript" src="/static/admin/js/actions.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/calendar.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+{% endblock %}

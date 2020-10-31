@@ -6,22 +6,23 @@ A portal for doctor and patient
 Django 3.0.8
 Python 3.7.7
 
-table Patient
-    Notes:
-    - Customer ka patient history
-    - age
+Notes:
+table CustomUser
     - name
-    - address
-    - phone
-    - gender
-    - email
     - dob
+    - address
+    - gender
+    - date of joining
+    - email
+
+table Patient
+    - phone
     - blood group
     - allergies
-    - any major illness diagnosed before
-    - List of medication you are currently taking 
     - marital status - single, married, divorsed, windowed
-    - date of joining
+
+    - Patient history
+    - List of medication you are currently taking 
     - occupation
     - Patient social history[alcohol/drugs/tobacco]
 
@@ -41,16 +42,24 @@ table Patient
 
 
 table Doctor Record
-    - name
-    - dob
-    - address
     - speciality/degree
-    - gender
     - college
     - experience
 
 table prescription
     - date
     - all meds
-    - patient
+    - patient   <foreign key>
+    - doc       <foreign key>
+
+table appointment
     - doc
+    - patient
+    - rest of appointment details
+
+features:
+    - appointments
+    - doc profile public
+    - patient profile visible only to doc
+    ML models
+        - xray chest corona check

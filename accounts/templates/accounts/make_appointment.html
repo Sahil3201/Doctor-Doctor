@@ -1,0 +1,53 @@
+{% extends "DoctorDoctor/base.html" %}
+{% load static %}
+
+{% block title_page %}Make an Appointment{% endblock %}
+{% block title %}Make an Appointment - DoctorDoctor{% endblock %}
+{% block title_in_li %}Make an Appointment{% endblock %}
+
+{% block css_section %}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}" />
+{% comment %}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
+{% endcomment %}
+{% endblock %}
+
+
+{% block inner_page %}
+<form method="POST">
+    {% csrf_token %}
+    {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+    {% endif %}
+    
+    {{form.patient}}
+    Doctor: {{form.doctor}} <br>
+    priority day 1: {{form.day1}}<br>
+    priority day 2: {{form.day2}}<br>
+    priority day 3: {{form.day3}}<br>
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
+
+{% block js_section %}
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<script type="text/javascript" src="/static/admin/js/core.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js">        </script>
+<script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+<script type="text/javascript" src="/static/admin/js/actions.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/calendar.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+{% endblock %}

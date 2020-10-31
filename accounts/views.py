@@ -6,7 +6,13 @@ from .forms import CustomUserForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView, CreateView
+
+def get_user_type(user):
+    if user.is_doctor == True:
+        return Doctor
+    else:
+        return Patient
 
 @login_required
 def user_logout(request):
@@ -63,8 +69,14 @@ def user_login(request):
             return render(request, 'accounts/login.html')
 
 def profile(request):
+    context = {}
+    print(request)
     if request.user.is_authenticated:
-        return render(request, 'accounts/profile.html')
+        queryset = get_user_type(request.user).objects.filter(customuser_ptr_id=request.user.id)
+        # context['allergies'] = queryset.get().allergies
+        context['fields'] = queryset.get()
+        print(context['fields'].allergies)
+        return render(request, 'accounts/profile.html',context)
     else:
         return HttpResponseRedirect(reverse('accounts:login'))
 
@@ -80,3 +92,108 @@ def welcome_email(email):
     recepient = email
     send_mail(subject, message, EMAIL_HOST_USER, [recepient], fail_silently = False,html_message=html_message)
     return HttpResponseRedirect(reverse('home'))
+
+# def myview(request):
+#     item = get_object_or_404(market, item=item)
+
+#     if request.method == 'POST':
+#         form = MyForm(request.POST)
+#         if form.is_valid():
+#             send = form.save()
+#             send.save()
+#             messages.success(request, f"Success")
+#     else:
+#         form = MyForm()
+
+#     return render(request,
+#                   "main/mytemplate.html",
+#                   context={"form":form})
+
+from django.views.generic.edit import UpdateView
+from .models import *
+from django.shortcuts import get_object_or_404
+from accounts.forms import *
+
+class user_update(UpdateView):
+    model = Patient#get_user_type()
+    # exclude = ['password','email']
+    # fields = ('fullname', 'date_of_birth', 'phone_number', 'blood_group', 'allergies', 'marital_status', 'emergency_Name',
+    #               'emergency_phone_number', 'emergency_relationship', 'insurance_id', 'insurance_company', 'insurance_validity')
+    # template_name_suffix = 'patient_update_form'
+    template_name = 'DoctorDoctor/profile_update.html'
+    success_url = reverse_lazy('accounts:profile')
+    form_class = UpdateViewForm
+    def get_context_data(self, **kwargs):
+        # print(super().get_context_data(**kwargs))
+        return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+        # pk=self.kwargs.get('pk')
+        user = self.request.user
+        queryset = Patient.objects.filter(customuser_ptr_id=user.id)
+        # print(user.id)
+        # return super().get_queryset()
+        # print(queryset)
+        return queryset
+
+    # def post(self, request, *args, **kwargs):
+    #     # print(self,request,args,kwargs,sep="  }  ")
+    #     return super().post(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        # form = UpdateViewForm
+        # print(form)
+        # return render(request, 'DoctorDoctor/profile_update.html', context={'form':form})
+        return super().get(request, *args, **kwargs)
+    
+    def get_object(self):
+        user = self.request.user
+        return get_object_or_404(Patient, id=user.id)#pk=self.request.session['user_id'])
+
+# from pprint import pprint as p
+# from accounts.forms import *
+# def user_update(request):
+#     context={}
+#     obj=get_object_or_404(Patient,id=request.user.id)
+#     form=UpdateViewForm(request.POST or None, instance = obj)
+#     if form.is_valid():
+#         form.save()
+#         return HttpResponseRedirect('/')
+#     context["form"]=form
+#     p(context)  
+#     return render(request,'DoctorDoctor/profile_update.html')
+
+from django.views.generic.edit import FormView
+class make_appointment(CreateView):
+    # model = Appointment
+    # success_url = reverse('accounts:active_appointments')
+    form_class = make_appointment_form
+    # fields = ('doctor','day1','day2','day3',)
+    template_name = 'accounts/make_appointment.html'
+    success_url = reverse_lazy('accounts:active_appointments')
+    # initial = {'patient':request.user.id}
+    def post(self, request, *args, **kwargs):
+        # request.POST['patient'] = request.user
+        req=request.POST.copy()
+        # req['patient'] = str(request.user.id)
+        # print(req)
+        return super().post(req, *args, **kwargs)
+
+    def form_valid(self, form):
+        print('in form_valid')
+        # form.instance.owner = self.request.user
+        print(form)
+        return super().form_valid(form)
+
+    def get_initial(self):
+        return {'patient':Patient.objects.filter(customuser_ptr_id=self.request.user.id).get()}
+        # return super().get_initial()
+
+class active_appointments(ListView):
+    model = Appointment
+    context_object_name = 'appointments'
+
+class list_doctors(ListView):
+    model = Doctor
+    template_name = 'accounts/list_doctors.html'
+    context_object_name = 'doctors'

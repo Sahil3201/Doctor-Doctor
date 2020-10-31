@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 from . import views
+from accounts import views as v
 
 app_name = "home"
 
@@ -24,5 +26,5 @@ urlpatterns = [
     path('accounts/',include('accounts.urls',namespace='accounts')),
     path('', views.home, name="home"),
     path('departments/', views.departments.as_view(), name='departments'),
-    path('doctors/', views.doctors.as_view(), name='doctors'),
+    url(r'^doctors/$',v.list_doctors.as_view(),name='list_doctors'),
 ]
