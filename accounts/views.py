@@ -1,8 +1,10 @@
+from .decorators import *
+from .forms import CustomUserForm
+
 from django.contrib.auth.mixins import (LoginRequiredMixin, PermissionRequiredMixin)
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
-from .forms import CustomUserForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
@@ -93,12 +95,15 @@ def welcome_email(email):
     send_mail(subject, message, EMAIL_HOST_USER, [recepient], fail_silently = False,html_message=html_message)
     return HttpResponseRedirect(reverse('home'))
 
+
 from django.views.generic.edit import UpdateView
 from .models import *
 from django.shortcuts import get_object_or_404
 from accounts.forms import *
 
-class user_update(UpdateView):
+class user_update(UpdateView, PermissionRequiredMixin):
+    # permission_required = 'polls.add_choice'
+    
     model = Patient
     template_name = 'DoctorDoctor/profile_update.html'
     success_url = reverse_lazy('accounts:profile')
@@ -125,7 +130,9 @@ class list_doctors(ListView):
     context_object_name = 'doctors'
 
 from django.views.generic.edit import FormView
-class make_appointment(CreateView):
+class make_appointment(PermissionRequiredMixin, CreateView):
+    permission_required = 'accounts.add_appointment'
+
     # success_url = reverse('accounts:active_appointments')
     form_class = make_appointment_form
     template_name = 'accounts/make_appointment.html'
@@ -140,3 +147,12 @@ class make_appointment(CreateView):
         print(form)
         return super().form_invalid(form)
 
+class see_schedule(ListView, LoginRequiredMixin):
+    # permission_required = 'doctors.see_'
+
+    model = Appointment
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = Appointment.objects.filter(doctor=self.request.user)
+        return queryset

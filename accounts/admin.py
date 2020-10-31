@@ -68,10 +68,13 @@ class CustomUserAdmin(BaseUserAdmin):
 	ordering = ('email',)
 	filter_horizontal = ()
 
-# admin.site.register(CustomUser,CustomUserAdmin)
+	# def has_add_permission(self, request, obj=None):
+	# 	return False
+	# def has_change_permission(self, request, obj=None):
+	# 	return False
+
+admin.site.register(CustomUser,CustomUserAdmin)
 admin.site.register(Patient)
 admin.site.register(Doctor)
 admin.site.register(Appointment)
 admin.site.register(Medicines)
-admin.site.register(CustomUser)
-admin.site.unregister(Group)

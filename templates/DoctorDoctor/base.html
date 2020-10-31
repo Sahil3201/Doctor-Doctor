@@ -100,8 +100,12 @@
                 </ul>
             </nav><!-- .nav-menu -->
 
+            {% if user.is_doctor %}
+            <a href="{% url 'accounts:see_schedule' %}" class="appointment-btn scrollto">See Schedule</a>
+            {% else %}
             <a href="{% url 'accounts:make_appointment' %}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span>
                 Appointment</a>
+            {% endif %}
 
         </div>
     </header><!-- End Header -->
