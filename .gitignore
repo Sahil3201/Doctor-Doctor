@@ -1,2 +1,7 @@
 REF
 .vscode
+Profile
+requirements.txt
+runtime.txt
+Reset.py
+venv

@@ -5,7 +5,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from .models import CustomUser
+from .models import *
 
 class CustomUserCreationForm(forms.ModelForm):
 	password1 = forms.CharField(label = 'Password',widget = forms.PasswordInput)
@@ -38,7 +38,7 @@ class CustomUserChangeForm(forms.ModelForm):
 
 	class Meta:
 		model = CustomUser
-		fields = ('email','name','surname',)
+		fields = ('email','fullname',)
 
 	def clean_password(self):
 		return self.initial['password']
@@ -47,13 +47,13 @@ class CustomUserAdmin(BaseUserAdmin):
 	form = CustomUserChangeForm
 	add_form = CustomUserCreationForm
 
-	list_display = ('email','name','surname','date_created')
+	list_display = ('email','fullname','date_created')
 	list_filter = ('is_admin',)
 
 	fieldsets = (
 		(None,{'fields': ('email','password')}),
-		('Personal info',{'fields':('name','surname',)}),
-		# ('Other info',{'fields':('date_created',)}),
+		('Personal info',{'fields':('fullname',)}),
+		('Other info',{'fields':('is_doctor',)}),
 		('Permissions',{'fields':('is_admin','is_active','is_staff'),}),
 		)
 
@@ -68,5 +68,13 @@ class CustomUserAdmin(BaseUserAdmin):
 	ordering = ('email',)
 	filter_horizontal = ()
 
+	# def has_add_permission(self, request, obj=None):
+	# 	return False
+	# def has_change_permission(self, request, obj=None):
+	# 	return False
+
 admin.site.register(CustomUser,CustomUserAdmin)
-admin.site.unregister(Group)
+admin.site.register(Patient)
+admin.site.register(Doctor)
+admin.site.register(Appointment)
+admin.site.register(Medicines)

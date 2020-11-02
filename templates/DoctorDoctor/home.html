@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}
+{% load static %}`
+{% load profile_tags %}
 
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>IPGM Project</title>
+    <title>Welcome to Doctor Doctor</title>
     <meta content="" name="descriptison">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{% static 'DoctorDoctor/assets/img/favicon.png' %}" rel="icon">
+    {#<link href="{% static 'DoctorDoctor/assets/img/favicon.png' %}" rel="icon"> #}
     <link href="{% static 'DoctorDoctor/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
@@ -24,8 +25,7 @@
     <link href="{% static 'DoctorDoctor/assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
     <link href="{% static 'DoctorDoctor/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
     <link href="{% static 'DoctorDoctor/assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
-    <link href="{% static 'DoctorDoctor/assets/vendor/owl.carousel/DoctorDoctor/assets/owl.carousel.min.css' %}"
-        rel="stylesheet">
+    <link href="{% static 'DoctorDoctor/assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
     <link href="{% static 'DoctorDoctor/assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
     <link href="{% static 'DoctorDoctor/assets/vendor/aos/aos.css' %}" rel="stylesheet">
 
@@ -53,15 +53,15 @@
 
 
             <!-- Uncomment below if you prefer to use an image logo -->
-            <h1 class="logo mr-auto"><a href="index.html">Doctor-Doctor</a></h1>
+            <h1 class="logo mr-auto"><a href="{% url 'home' %}">Doctor-Doctor</a></h1>
 
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
-                    <li class="active"><a href="index.html">Home</a></li>
+                    <li class="active"><a href="{% url 'home' %}">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#departments">Departments</a></li>
-                    <li><a href="#doctors">Doctors</a></li>
+                    <li><a href="{% url 'list_doctors' %}">Doctors</a></li>
                     <!-- <li class="drop-down"><a href="">Drop Down</a>
           <ul>
             <li><a href="#">Drop Down 1</a></li>
@@ -79,13 +79,34 @@
             <li><a href="#">Drop Down 4</a></li>
           </ul>
         </li> -->
-                    <li><a href="#contact">Contact</a></li>
+                    <li>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'accounts:logout' %}">{{user.email}}</a>
+                        {% else %}
+                        <a href="{% url 'accounts:login' %}">Login/Signup</a>
+                        {% endif %}
+                    </li>
 
                 </ul>
             </nav><!-- .nav-menu -->
-
-            <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make
-                    an</span>Appointment</a>
+            {% comment %}
+            {% if user.is_doctor %}
+            <a href="{% url 'accounts:see_schedule' %}" class="appointment-btn scrollto">See Schedule</a>
+            {% else %}
+                        <a href="{% url 'accounts:make_appointment' %}" class="appointment-btn scrollto"><span
+                            class="d-none d-md-inline">Make an</span>
+                            Appointment</a>
+                            {% endif %}
+            {% endcomment %}
+                            
+                            
+                            {% if request.user|has_group:"Doctors" %}
+                        <a href="{% url 'accounts:see_schedule' %}" class="appointment-btn scrollto">See Appointment Requests</a>
+                        {% else %}
+                        <a href="{% url 'accounts:make_appointment' %}" class="appointment-btn scrollto"><span
+                                class="d-none d-md-inline">Make an</span>
+                                Appointment</a>
+                                {% endif %}
 
         </div>
     </header><!-- End Header -->
@@ -409,27 +430,28 @@
                                 <h3>Neurology</h3>
                                 <img src="{% static 'DoctorDoctor/assets/img/departments-2.jpg' %}" alt=""
                                     class="img-fluid">
-                                    <p>Neurology is a branch of medicine dealing with disorders of the nervous system.
-                                        Neurology deals with
-                                        the diagnosis and treatment of all categories of conditions and disease involving
-                                        the central and
-                                        peripheral nervous systems (and their subdivisions, the autonomic and somatic
-                                        nervous systems),
-                                        including their coverings, blood vessels, and all effector tissue, such as muscle.[
-                                    </p>
+                                <p>Neurology is a branch of medicine dealing with disorders of the nervous system.
+                                    Neurology deals with
+                                    the diagnosis and treatment of all categories of conditions and disease involving
+                                    the central and
+                                    peripheral nervous systems (and their subdivisions, the autonomic and somatic
+                                    nervous systems),
+                                    including their coverings, blood vessels, and all effector tissue, such as muscle.[
+                                </p>
                             </div>
                             <div class="tab-pane" id="tab-3">
                                 <h3>Hepatology</h3>
                                 <img src="{% static 'DoctorDoctor/assets/img/departments-3.jpg' %}" alt=""
                                     class="img-fluid">
-                                    <img src="assets/img/departments-3.jpg" alt="" class="img-fluid">
-                                    <p>Hepatology is the branch of medicine that incorporates the study of liver,
-                                        gallbladder, biliary tree,
-                                        and pancreas as well as management of their disorders. Although traditionally
-                                        considered a
-                                        sub-specialty of gastroenterology, rapid expansion has led in some countries to
-                                        doctors specializing
-                                        solely on this area, who are called hepatologists.</p>
+                                <img src="{% static 'DoctorDoctor/assets/img/departments-3.jpg' %}" alt=""
+                                    class="img-fluid">
+                                <p>Hepatology is the branch of medicine that incorporates the study of liver,
+                                    gallbladder, biliary tree,
+                                    and pancreas as well as management of their disorders. Although traditionally
+                                    considered a
+                                    sub-specialty of gastroenterology, rapid expansion has led in some countries to
+                                    doctors specializing
+                                    solely on this area, who are called hepatologists.</p>
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,29 @@
+{% extends "DoctorDoctor/base.html" %}
+
+{% block title_page %}Appointment Requests{% endblock %}
+{% block title %}Appointment Requests - DoctorDoctor{% endblock %}
+{% block title_in_li %}Appointment Requests{% endblock %}
+
+{% block inner_page %}
+Here are the Appointment Requests 
+<ol>
+    {% for a in schedule %}
+    <li>
+        Client: {{a.patient}}<br>
+        {% if a.approved_for == '1' %}
+        <i class="icofont-tick-boxed"></i> Approved for: <strong>{{a.day1}}</strong> at <strong>{{a.approved_time}}</strong>
+        {% elif a.approved_for == '2' %}
+        <i class="icofont-tick-boxed"></i> Approved for: <strong>{{a.day2}}</strong> at <strong>{{a.approved_time}}</strong>
+        {% elif a.approved_for == '3' %}
+        <i class="icofont-tick-boxed"></i> Approved for: <strong>{{a.day3}}</strong> at <strong>{{a.approved_time}}</strong>
+        {% else %}
+        Day 1: {{a.day1}}<br>
+        Day 2: {{a.day2}}<br>
+        Day 3: {{a.day3}}<br>
+        <i class="icofont-close-squared-alt"></i> Not yet approved!
+        {% endif %}
+        <br><a href="{% url 'accounts:detail_appointment' pk=a.id %}">view!</a><hr>
+    </li>
+    {% endfor %}
+</ol>
+{% endblock %}

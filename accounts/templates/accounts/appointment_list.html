@@ -1,0 +1,18 @@
+{% extends "DoctorDoctor/base.html" %}
+
+{% block title_page %}Appointments{% endblock %}
+{% block title %}Appointments - DoctorDoctor{% endblock %}
+{% block title_in_li %}Appointments{% endblock %}
+
+{% block inner_page %}
+<ol>
+    {% for a in appointments %}
+    <li>
+        Doc: {{a.doctor}}<br>
+        {{a.day1}}<br>
+        {{a.day2}}<br>
+        {{a.day3}}<br>
+    </li>
+    {% endfor %}
+</ol>
+{% endblock %}

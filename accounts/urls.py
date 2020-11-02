@@ -5,8 +5,14 @@ from . import views
 app_name = "accounts"
 
 urlpatterns = [
-	url(r'^login/$',views.user_login,name='login'),
-	url(r'^logout/$',views.user_logout,name='logout'),
-	url(r'^signup/$',views.user_signup,name='signup'),
-	url(r'^profile/$',views.profile,name='profile'),
+	url(r'^accounts/login/$',views.user_login,name='login'),
+	url(r'^accounts/logout/$',views.user_logout,name='logout'),
+	url(r'^accounts/signup/$',views.user_signup,name='signup'),
+	url(r'^accounts/profile/$',views.profile,name='profile'),
+	url(r'^accounts/profile/update/$',views.user_update.as_view(),name='user_update'),
+	url(r'^accounts/profile/update/doctor/$',views.doctor_user_update.as_view(),name='doctor_user_update'),
+	url(r'^appointments/new/$',views.make_appointment.as_view(),name='make_appointment'),
+	url(r'^appointments/all/$',views.active_appointments.as_view(),name='active_appointments'),
+	url(r'^doctor-portal/see-schedule/$',views.see_schedule.as_view(),name='see_schedule'),
+	url(r'^doctor-portal/detail-appointment/(?P<pk>[\d]+)/$',views.detail_appointment,name='detail_appointment'),
 ]

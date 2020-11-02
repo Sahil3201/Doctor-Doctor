@@ -5,5 +5,9 @@
 {% block title_in_li %}AT doctors{% endblock %}
 
 {% block inner_page %}
-<h2>doctors!!</h2>
+<ol>
+{% for i in doctors %}
+<li>{{i.email}}</li>
+{% endfor %}
+</ol>
 {% endblock %}
