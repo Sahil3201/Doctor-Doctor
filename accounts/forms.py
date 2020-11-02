@@ -43,7 +43,7 @@ class DoctorForm(forms.ModelForm):
 
 
 class UpdateViewForm(forms.ModelForm):
-    date_of_birth = DateField(widget=AdminDateWidget)
+    date_of_birth = DateField(widget=AdminDateWidget(attrs={'placeholder': 'YYYY:MM:DD'}))
 
     class Meta:
         model = Patient
@@ -54,7 +54,7 @@ class UpdateViewForm(forms.ModelForm):
         # }
 
 class DoctorUpdateViewForm(forms.ModelForm):
-    date_of_birth = DateField(widget=AdminDateWidget)
+    date_of_birth = DateField(widget=AdminDateWidget(attrs={'placeholder': 'YYYY:MM:DD'}))
 
     class Meta:
         model = Doctor
