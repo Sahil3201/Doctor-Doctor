@@ -28,7 +28,6 @@ Email: {{user.email}}
 {% if request.user|has_group:"Doctors" %}
 <a href="{% url 'accounts:doctor_user_update' %}" class="appointment-btn">Edit</a>
 {% else %}
-<a href="{% url 'accounts:make_appointment' %}" class="appointment-btn">
-        class="d-none d-md-inline">Edit</a>
+<a href="{% url 'accounts:make_appointment' %}" class="appointment-btn">Edit</a>
 {% endif %}
 {% endblock %}
