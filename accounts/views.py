@@ -21,7 +21,7 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('accounts:login'))
 
-
+from django.contrib.auth.models import Group
 def user_signup(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse('home'))
@@ -37,6 +37,13 @@ def user_signup(request):
                 user = user_form.save(commit=False)
                 user.set_password(user.password)
                 user.save()
+
+                if request.POST.get('is_doctor'):
+                    my_group = Group.objects.get(name='Doctors') 
+                    my_group.user_set.add(user)
+                else:
+                    my_group = Group.objects.get(name='Patients')
+                    my_group.user_set.add(user)
                 welcome_email(user.email)
 
                 registered = True
@@ -138,23 +145,6 @@ class doctor_user_update( UpdateView):
     # def get_object(self):
     #     user = self.request.user
     #     return get_object_or_404(Doctor, id=user.id)
-
-class doctor_user_update( UpdateView):
-    model = Doctor
-    template_name = 'DoctorDoctor/profile_update.html'
-    success_url = reverse_lazy('accounts:profile')
-    form_class = DoctorUpdateViewForm
-    def get_context_data(self, **kwargs):
-        return super().get_context_data(**kwargs)
-
-    def get_queryset(self):
-        user = self.request.user
-        queryset = Doctor.objects.filter(customuser_ptr_id=user.id)
-        return queryset
-    
-    def get_object(self):
-        user = self.request.user
-        return get_object_or_404(Doctor, id=user.id)
 
 class active_appointments(PermissionRequiredMixin, ListView):
     permission_required = 'accounts:add_appointemnt'
