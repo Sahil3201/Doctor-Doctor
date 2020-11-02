@@ -85,7 +85,7 @@ def user_login(request):
 
 class see_public_profile(DetailView):
     model = Doctor
-    template_name = 'DoctorDoctor/see_public_profile.html'
+    template_name = 'accounts/see_public_profile.html'
     context_object_name = 'fields'
     def get_object(self, queryset=None):
         queryset = Doctor.objects.get(id=self.kwargs.get('pk'))
@@ -122,7 +122,7 @@ from accounts.forms import *
 
 class user_update( UpdateView):
     model = Patient
-    template_name = 'DoctorDoctor/profile_update.html'
+    template_name = 'accounts/profile_update.html'
     success_url = reverse_lazy('accounts:profile')
     form_class = UpdateViewForm
     def get_context_data(self, **kwargs):
@@ -139,7 +139,7 @@ class user_update( UpdateView):
 
 class doctor_user_update( UpdateView):
     model = Doctor
-    template_name = 'DoctorDoctor/profile_update.html'
+    template_name = 'accounts/profile_update.html'
     success_url = reverse_lazy('accounts:profile')
     form_class = UpdateViewForm
     def get_context_data(self, **kwargs):
