@@ -64,9 +64,9 @@ class DoctorUpdateViewForm(forms.ModelForm):
         # }
 
 class make_appointment_form(forms.ModelForm):
-    day1 = DateField(widget=AdminDateWidget)
-    day2 = DateField(widget=AdminDateWidget)
-    day3 = DateField(widget=AdminDateWidget)
+    day1 = DateField(widget=AdminDateWidget(attrs={'placeholder': 'YYYY:MM:DD'}))
+    day2 = DateField(widget=AdminDateWidget(attrs={'placeholder': 'YYYY:MM:DD'}))
+    day3 = DateField(widget=AdminDateWidget(attrs={'placeholder': 'YYYY:MM:DD'}))
     # patient = forms.CharField(widget=forms.HiddenInput())
     # message = CharField(widget=forms.Textarea)
 
