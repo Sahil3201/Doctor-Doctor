@@ -7,7 +7,7 @@
 
 {% block inner_page %}
 
-{% if user.name %}<br>Name: {{user.name}}{% endif %}
+{% if user.name %}<br>Name: {{fields.name}}{% endif %}
 Email: {{fields.email}}
 {% if fields.fullname%}<br>fullname: {{fields.fullname}}{% endif%}
 {% if fields.date_of_birth%}<br>date_of_birth: {{fields.date_of_birth}}{% endif%}
@@ -25,9 +25,4 @@ Email: {{fields.email}}
 {% if fields.college %}<br>college: {{fields.college}}{% endif %}
 {% if fields.experience_years %}<br>experience_years: {{fields.experience_years}}{% endif %}
 <br><br>
-{% if request.user|has_group:"Doctors" %}
-<a href="{% url 'accounts:doctor_user_update' %}" class="appointment-btn">Edit</a>
-{% else %}
-<a href="{% url 'accounts:user_update' %}" class="appointment-btn">Edit</a>
-{% endif %}
 {% endblock %}

@@ -83,6 +83,14 @@ def user_login(request):
         else:
             return render(request, 'accounts/login.html')
 
+class see_public_profile(DetailView):
+    model = Doctor
+    template_name = 'DoctorDoctor/see_public_profile.html'
+    context_object_name = 'fields'
+    def get_object(self, queryset=None):
+        queryset = Doctor.objects.get(id=self.kwargs.get('pk'))
+        return queryset
+
 def profile(request):
     context = {}
     if request.user.is_authenticated:

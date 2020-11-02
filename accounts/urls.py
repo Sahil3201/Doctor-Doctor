@@ -15,4 +15,5 @@ urlpatterns = [
 	url(r'^appointments/all/$',views.active_appointments.as_view(),name='active_appointments'),
 	url(r'^doctor-portal/see-schedule/$',views.see_schedule.as_view(),name='see_schedule'),
 	url(r'^doctor-portal/detail-appointment/(?P<pk>[\d]+)/$',views.detail_appointment,name='detail_appointment'),
+	url(r'^see-profile/(?P<pk>[\d]+)/$',views.see_public_profile.as_view(),name='see_public_profile'),
 ]
