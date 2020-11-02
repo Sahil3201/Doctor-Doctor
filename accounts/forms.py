@@ -53,6 +53,15 @@ class UpdateViewForm(forms.ModelForm):
         #     'date_of_birth': AdminDateWidget(),
         # }
 
+class DoctorUpdateViewForm(forms.ModelForm):
+    date_of_birth = DateField(widget=AdminDateWidget)
+
+    class Meta:
+        model = Doctor
+        fields = ('fullname', 'date_of_birth', 'speciality', 'college', 'experience_years',)
+        # widgets = {
+        #     'date_of_birth': AdminDateWidget(),
+        # }
 
 class make_appointment_form(forms.ModelForm):
     day1 = DateField(widget=AdminDateWidget)

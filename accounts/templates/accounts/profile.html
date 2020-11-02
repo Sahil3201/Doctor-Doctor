@@ -21,5 +21,14 @@ Email: {{user.email}}
 {% if fields.insurance_id%}<br>insurance_id: {{fields.insurance_id}}{% endif%}
 {% if fields.insurance_company%}<br>insurance_company: {{fields.insurance_company}}{% endif%}
 {% if fields.insurance_validity%}<br>insurance_validity: {{fields.insurance_validity}}{% endif%}
-<br><a href="{% url 'accounts:user_update' %}">Edit!</a>
+{% if fields.speciality %}<br>speciality: {{fields.speciality}}{% endif %}
+{% if fields.college %}<br>college: {{fields.college}}{% endif %}
+{% if fields.experience_years %}<br>experience_years: {{fields.experience_years}}{% endif %}
+<br><br>
+{% if request.user|has_group:"Doctors" %}
+<a href="{% url 'accounts:doctor_user_update' %}" class="appointment-btn">Edit</a>
+{% else %}
+<a href="{% url 'accounts:make_appointment' %}" class="appointment-btn">
+        class="d-none d-md-inline">Edit</a>
+{% endif %}
 {% endblock %}

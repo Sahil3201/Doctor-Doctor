@@ -15,18 +15,26 @@
 {% block inner_page %}
 <form method="POST">
     {% csrf_token %}
-    Allergies: {{form.allergies}}<br>
-    fullname: {{form.fullname}}<br>
-    date_of_birth: {{form.date_of_birth}}<br>
-    phone_number: {{form.phone_number}}<br>
-    blood_group: {{form.blood_group}}<br>
-    marital_status: {{form.marital_status}}<br>
-    emergency_Name: {{form.emergency_Name}}<br>
-    emergency_phone_number: {{form.emergency_phone_number}}<br>
-    emergency_relationship: {{form.emergency_relationship}}<br>
-    insurance_id: {{form.insurance_id}}<br>
-    insurance_company: {{form.insurance_company}}<br>
-    insurance_validity: {{form.insurance_validity}}<br>
+    {% if user.is_doctor %}
+        <br>fullname: {{form.fullname}}
+        <br>date_of_birth: {{form.date_of_birth}}
+        <br>speciality: {{form.speciality}}
+        <br>college: {{form.college}}
+        <br>experience_years: {{form.experience_years}}<br>
+    {% else %}
+        Allergies: {{form.allergies}}<br>
+        fullname: {{form.fullname}}<br>
+        date_of_birth: {{form.date_of_birth}}<br>
+        phone_number: {{form.phone_number}}<br>
+        blood_group: {{form.blood_group}}<br>
+        marital_status: {{form.marital_status}}<br>
+        emergency_Name: {{form.emergency_Name}}<br>
+        emergency_phone_number: {{form.emergency_phone_number}}<br>
+        emergency_relationship: {{form.emergency_relationship}}<br>
+        insurance_id: {{form.insurance_id}}<br>
+        insurance_company: {{form.insurance_company}}<br>
+        insurance_validity: {{form.insurance_validity}}<br>
+    {% endif %}
     <input type="submit" value="Submit">
 </form>
 {% endblock %}

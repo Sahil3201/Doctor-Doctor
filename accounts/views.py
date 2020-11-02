@@ -47,7 +47,10 @@ def user_signup(request):
                               {'user_form': user_form,
                                'registered': registered})
         else:
-            user_form = PatientForm()
+            if request.POST.get('is_doctor'):
+                user_form = DoctorForm()
+            else:
+                user_form = PatientForm()
             return render(request, 'accounts/signup.html',
                           {'user_form': user_form,
                            'registered': registered})
@@ -75,12 +78,10 @@ def user_login(request):
 
 def profile(request):
     context = {}
-    print(request)
     if request.user.is_authenticated:
         queryset = get_user_type(request.user).objects.filter(customuser_ptr_id=request.user.id)
         # context['allergies'] = queryset.get().allergies
         context['fields'] = queryset.get()
-        print(context['fields'].allergies)
         return render(request, 'accounts/profile.html',context)
     else:
         return HttpResponseRedirect(reverse('accounts:login'))
@@ -104,8 +105,7 @@ from .models import *
 from django.shortcuts import get_object_or_404
 from accounts.forms import *
 
-class user_update(PermissionRequiredMixin, UpdateView):
-
+class user_update( UpdateView):
     model = Patient
     template_name = 'DoctorDoctor/profile_update.html'
     success_url = reverse_lazy('accounts:profile')
@@ -121,6 +121,40 @@ class user_update(PermissionRequiredMixin, UpdateView):
     def get_object(self):
         user = self.request.user
         return get_object_or_404(Patient, id=user.id)
+
+class doctor_user_update( UpdateView):
+    model = Doctor
+    template_name = 'DoctorDoctor/profile_update.html'
+    success_url = reverse_lazy('accounts:profile')
+    form_class = UpdateViewForm
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Doctor.objects.filter(customuser_ptr_id=user.id)
+        return queryset
+    
+    # def get_object(self):
+    #     user = self.request.user
+    #     return get_object_or_404(Doctor, id=user.id)
+
+class doctor_user_update( UpdateView):
+    model = Doctor
+    template_name = 'DoctorDoctor/profile_update.html'
+    success_url = reverse_lazy('accounts:profile')
+    form_class = DoctorUpdateViewForm
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Doctor.objects.filter(customuser_ptr_id=user.id)
+        return queryset
+    
+    def get_object(self):
+        user = self.request.user
+        return get_object_or_404(Doctor, id=user.id)
 
 class active_appointments(PermissionRequiredMixin, ListView):
     permission_required = 'accounts:add_appointemnt'

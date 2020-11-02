@@ -100,29 +100,29 @@
 
                 </ul>
             </nav><!-- .nav-menu -->
-{% comment %}
-{% if user.is_doctor %}
-<a href="{% url 'accounts:see_schedule' %}" class="appointment-btn scrollto">See Schedule</a>
-{% else %}
+            {% comment %}
+            {% if user.is_doctor %}
+            <a href="{% url 'accounts:see_schedule' %}" class="appointment-btn scrollto">See Schedule</a>
+            {% else %}
             <a href="{% url 'accounts:make_appointment' %}" class="appointment-btn scrollto"><span
-                class="d-none d-md-inline">Make an</span>
+                    class="d-none d-md-inline">Make an</span>
                 Appointment</a>
-                {% endif %}
-{% endcomment %}
-                
-                
-                {% if request.user|has_group:"Doctors" %}
+            {% endif %}
+            {% endcomment %}
+
+
+            {% if request.user|has_group:"Doctors" %}
             <a href="{% url 'accounts:see_schedule' %}" class="appointment-btn scrollto">See Appointment Requests</a>
             {% else %}
             <a href="{% url 'accounts:make_appointment' %}" class="appointment-btn scrollto"><span
                     class="d-none d-md-inline">Make an</span>
-                    Appointment</a>
-                    {% endif %}
+                Appointment</a>
+            {% endif %}
 
-                    
-                    
-                </div>
-            </header><!-- End Header -->
+
+
+        </div>
+    </header><!-- End Header -->
 
     <main id="main">
         <!-- ======= Breadcrumbs Section ======= -->
