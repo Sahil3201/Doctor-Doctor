@@ -90,11 +90,20 @@
           </ul>
         </li> -->
                     <!-- <li><a href="#contact">Contact</a></li> -->
-                    <li>
+                    <li class="drop-down">
                         {% if user.is_authenticated %}
-                        <a href="{% url 'accounts:logout' %}">{{user.email}}</a>
+                        <a href="">My account</a>
+                        <ul>
+                            <li><a href="#">{{user.email}}</a></li>
+                            <li><a href="{% url 'accounts:profile' %}">My profile</a></li>
+                            <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                        </ul>
                         {% else %}
-                        <a href="{% url 'accounts:login' %}">Login/Signup</a>
+                        <a href="">LogIn/SignUp</a>
+                        <ul>
+                            <li><a href="{% url 'accounts:login' %}">LogIn</a></li>
+                            <li><a href="{% url 'accounts:signup' %}">SignUp</a></li>
+                        </ul>
                         {% endif %}
                     </li>
 
