@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}
+{% load static %}`
+{% load profile_tags %}
 
 <head>
     <meta charset="utf-8">
@@ -60,7 +61,7 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#departments">Departments</a></li>
-                    <li><a href="#doctors">Doctors</a></li>
+                    <li><a href="{% url 'list_doctors' %}">Doctors</a></li>
                     <!-- <li class="drop-down"><a href="">Drop Down</a>
           <ul>
             <li><a href="#">Drop Down 1</a></li>
@@ -82,15 +83,30 @@
                         {% if user.is_authenticated %}
                         <a href="{% url 'accounts:logout' %}">{{user.email}}</a>
                         {% else %}
-                        <a href="{% url 'accounts:login' %}">Login/Sign up</a>
+                        <a href="{% url 'accounts:login' %}">Login/Signup</a>
                         {% endif %}
                     </li>
 
                 </ul>
             </nav><!-- .nav-menu -->
-
-            <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make
-                    an</span>Appointment</a>
+            {% comment %}
+            {% if user.is_doctor %}
+            <a href="{% url 'accounts:see_schedule' %}" class="appointment-btn scrollto">See Schedule</a>
+            {% else %}
+                        <a href="{% url 'accounts:make_appointment' %}" class="appointment-btn scrollto"><span
+                            class="d-none d-md-inline">Make an</span>
+                            Appointment</a>
+                            {% endif %}
+            {% endcomment %}
+                            
+                            
+                            {% if request.user|has_group:"Doctors" %}
+                        <a href="{% url 'accounts:see_schedule' %}" class="appointment-btn scrollto">See Appointment Requests</a>
+                        {% else %}
+                        <a href="{% url 'accounts:make_appointment' %}" class="appointment-btn scrollto"><span
+                                class="d-none d-md-inline">Make an</span>
+                                Appointment</a>
+                                {% endif %}
 
         </div>
     </header><!-- End Header -->

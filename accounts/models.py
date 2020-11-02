@@ -27,6 +27,7 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractUser):
     id              = models.AutoField(primary_key=True)
+    username        = models.CharField(max_length=30,null=True,blank=True)
     fullname        = models.CharField(blank=True, null=True, max_length=255)##
     is_doctor       = models.BooleanField(default=False, blank=True, null=True)
     password        = models.CharField(max_length=255)
@@ -45,8 +46,8 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return str(self.email)
-    class Meta:
-        verbose_name = 'All User'
+    # class Meta:
+    #     verbose_name = 'All User'
 blood_group_choices = [
     ('a+', 'A+ve'),
     ('a-', 'A-ve'),
@@ -87,8 +88,8 @@ class Patient(CustomUser):
     insurance_company    = models.CharField(blank=True, null=True, max_length=512)
     insurance_validity    = models.DateField(blank=True, editable=True,null=True)
 
-    def get_absolute_url(self):
-        return reverse('accounts:profile')#, args=[str(self.id)])
+    # def get_absolute_url(self):
+    #     return reverse('accounts:profile')#, args=[str(self.id)])
     class Meta:
         verbose_name = 'User: Patient'
 
@@ -101,23 +102,28 @@ class Doctor(CustomUser):
 
     class Meta:
         verbose_name = 'User: Doctor'
+        # permissions = [('can_eat_pizzas', 'Can eat pizzas')]
 
 class Appointment(models.Model):
+    id              = models.AutoField(primary_key=True)
     doctor          = models.ForeignKey(Doctor,related_name='appointment_doctor',on_delete=models.CASCADE)
-    patient         = models.ForeignKey(Patient,related_name='appointment_patient',on_delete=models.CASCADE,null=True)
+    patient         = models.ForeignKey(Patient,related_name='appointment_patient',on_delete=models.CASCADE)
     day1            = models.DateField(blank=True, editable=True,null=True)
     day2            = models.DateField(blank=True, editable=True,null=True)
     day3            = models.DateField(blank=True, editable=True,null=True)
+    message         = models.CharField(blank=True, null=True, max_length=512)
     approved_for    = models.CharField(blank=True, editable=True,null=True, max_length=10)
+    approved_time   = models.CharField(blank=True, editable=True,null=True, max_length=10)
     
     class Meta:
         verbose_name = 'Appointment'
+
     def __str__(self):
         return 'For '+str(self.doctor)+' by '+str(self.patient)
 
 class Medicines(models.Model):
-    appointment        = models.ForeignKey(Doctor,related_name='medicines_appointment',on_delete=models.CASCADE)
-    medicine_name    = models.CharField(blank=True, null=True, max_length=512)
+    appointment         = models.ForeignKey(Doctor,related_name='medicines_appointment',on_delete=models.CASCADE)
+    medicine_name       = models.CharField(blank=True, null=True, max_length=512)
 
     class Meta:
         verbose_name = 'Medicine'

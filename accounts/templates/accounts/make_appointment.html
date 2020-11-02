@@ -19,24 +19,25 @@
     {% csrf_token %}
     {% if form.errors %}
     {% for field in form %}
-        {% for error in field.errors %}
-            <div class="alert alert-danger">
-                <strong>{{ error|escape }}</strong>
-            </div>
-        {% endfor %}
+    {% for error in field.errors %}
+    <div class="alert alert-danger">
+        <strong>{{ error|escape }}</strong>
+    </div>
+    {% endfor %}
     {% endfor %}
     {% for error in form.non_field_errors %}
-        <div class="alert alert-danger">
-            <strong>{{ error|escape }}</strong>
-        </div>
+    <div class="alert alert-danger">
+        <strong>{{ error|escape }}</strong>
+    </div>
     {% endfor %}
     {% endif %}
-    
+
     {{form.patient}}
     Doctor: {{form.doctor}} <br>
     priority day 1: {{form.day1}}<br>
     priority day 2: {{form.day2}}<br>
     priority day 3: {{form.day3}}<br>
+    message: {{form.message}}<br>
     <input type="submit" value="Submit">
 </form>
 {% endblock %}

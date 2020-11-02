@@ -4,7 +4,7 @@
 # from .models import UserProfileInfo
 from accounts.models import Appointment
 from django.forms.widgets import DateInput, SelectDateWidget
-from django.contrib.admin.widgets import AdminDateWidget
+from django.contrib.admin.widgets import AdminDateWidget, AdminTimeWidget
 from accounts.models import *
 from django.forms.fields import *
 from .models import *
@@ -12,7 +12,7 @@ from django import forms
 from django.core.validators import RegexValidator
 
 
-class CustomUserForm(forms.ModelForm):
+class PatientForm(forms.ModelForm):
     password = forms.CharField(required=True,
                                widget=forms.PasswordInput(),)
     email = forms.EmailField(required=True,)
@@ -20,7 +20,17 @@ class CustomUserForm(forms.ModelForm):
 
     class Meta:
         fields = ('email', 'password', 'is_doctor')
-        model = CustomUser
+        model = Patient
+
+class DoctorForm(forms.ModelForm):
+    password = forms.CharField(required=True,
+                               widget=forms.PasswordInput(),)
+    email = forms.EmailField(required=True,)
+    is_doctor = forms.BooleanField(required=False, label="Are you a doctor?")
+
+    class Meta:
+        fields = ('email', 'password', 'is_doctor')
+        model = Doctor
 
 # class PatientForm(forms.ModelForm):
 
@@ -28,8 +38,8 @@ class CustomUserForm(forms.ModelForm):
 #         model = Patient
 
 
-class DateInput(forms.DateInput):
-    input_type = 'date'
+# class DateInput(forms.DateInput):
+#     input_type = 'date'
 
 
 class UpdateViewForm(forms.ModelForm):
@@ -49,20 +59,51 @@ class make_appointment_form(forms.ModelForm):
     day2 = DateField(widget=AdminDateWidget)
     day3 = DateField(widget=AdminDateWidget)
     # patient = forms.CharField(widget=forms.HiddenInput())
+    # message = CharField(widget=forms.Textarea)
 
     class Meta:
         model = Appointment
-        fields = ('doctor', 'day1', 'day2', 'day3',)  # 'patient')
+        fields = ('doctor', 'day1', 'day2', 'day3','message')  # 'patient')
+        
+        widgets = {
+          'message': forms.Textarea(attrs={'rows':4, 'cols':60}),
+        }
+
+
+# class approve_appointment(forms.ModelForm):
+#     day1 = DateField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+#     day2 = DateField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+#     day3 = DateField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+#     patient = CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+#     message = CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+    
+#     approved_for = forms.ChoiceField(choices=(
+#         ('1', 'day 1'), ('2', 'day 2'), ('3', 'day 3'),), label="Approved for day: ")
+
+#     class Meta:
+#         model = Appointment
+#         fields = ('approved_for',)#'patient', 'day1', 'day2', 'day3','message')
+#         widget={'message':forms.Textarea()}
 
 
 class approve_appointment(forms.ModelForm):
-    day1 = DateField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
-    day2 = DateField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
-    day3 = DateField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
-    patient = CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+    # day1 = DateField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+    # day2 = DateField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+    # day3 = DateField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+    # patient = CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+    # message = CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+    approved_time = CharField(widget=AdminTimeWidget(attrs={'placeholder': 'hh:mm XM'}))
     approved_for = forms.ChoiceField(choices=(
-        ('0', '---'), ('1', 'day 1'), ('2', 'day 2'), ('3', 'day 3'),), label="Approved for day: ")
+        ('1', 'day 1'), ('2', 'day 2'), ('3', 'day 3'),), label="Approved for day: ")
+
+    # def __init__(self, ap_id, data=None, files=None, auto_id='id_%s', prefix=None, initial=None, error_class=ErrorList, label_suffix=None, empty_permitted=False, instance=None, use_required_attribute=None, renderer=None):
+    #     super().__init__(data=data, files=files, auto_id=auto_id, prefix=prefix, initial=initial, error_class=error_class, label_suffix=label_suffix, empty_permitted=empty_permitted, instance=instance, use_required_attribute=use_required_attribute, renderer=renderer)
+    # def __init__(self, ap_id, *args, **kwargs):
+    #     approved_for = forms.ModelChoiceField(ap_id)
+    #     accountid = kwargs.pop('accountid', None)
+    #     super(approve_appointment, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Appointment
-        fields = ('patient', 'day1', 'day2', 'day3')
+        fields = ('approved_for','approved_time')
+        # widget={'message':forms.Textarea()}

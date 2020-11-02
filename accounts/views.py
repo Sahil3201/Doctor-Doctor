@@ -1,5 +1,5 @@
 from .decorators import *
-from .forms import CustomUserForm
+from .forms import *
 
 from django.contrib.auth.mixins import (LoginRequiredMixin, PermissionRequiredMixin)
 from django.urls import reverse, reverse_lazy
@@ -28,7 +28,10 @@ def user_signup(request):
     else:
         registered = False
         if request.method == 'POST':
-            user_form = CustomUserForm(data=request.POST)
+            if request.POST.get('is_doctor'):
+                user_form = DoctorForm(data=request.POST)
+            else:
+                user_form = PatientForm(data=request.POST)
 
             if user_form.is_valid():
                 user = user_form.save(commit=False)
@@ -44,7 +47,7 @@ def user_signup(request):
                               {'user_form': user_form,
                                'registered': registered})
         else:
-            user_form = CustomUserForm()
+            user_form = PatientForm()
             return render(request, 'accounts/signup.html',
                           {'user_form': user_form,
                            'registered': registered})
@@ -101,9 +104,8 @@ from .models import *
 from django.shortcuts import get_object_or_404
 from accounts.forms import *
 
-class user_update(UpdateView, PermissionRequiredMixin):
-    # permission_required = 'polls.add_choice'
-    
+class user_update(PermissionRequiredMixin, UpdateView):
+
     model = Patient
     template_name = 'DoctorDoctor/profile_update.html'
     success_url = reverse_lazy('accounts:profile')
@@ -118,9 +120,11 @@ class user_update(UpdateView, PermissionRequiredMixin):
     
     def get_object(self):
         user = self.request.user
-        return get_object_or_404(Patient, id=user.id)#pk=self.request.session['user_id'])
+        return get_object_or_404(Patient, id=user.id)
 
-class active_appointments(ListView):
+class active_appointments(PermissionRequiredMixin, ListView):
+    permission_required = 'accounts:add_appointemnt'
+    
     model = Appointment
     context_object_name = 'appointments'
 
@@ -143,10 +147,6 @@ class make_appointment(PermissionRequiredMixin, CreateView):
         form.instance.patient = Patient.objects.filter(customuser_ptr_id=self.request.user.id).get()
         return super().form_valid(form)
 
-    def form_invalid(self, form):
-        print(form)
-        return super().form_invalid(form)
-
 class see_schedule(PermissionRequiredMixin, ListView):
     permission_required = 'accounts.view_appointment'
 
@@ -159,10 +159,28 @@ class see_schedule(PermissionRequiredMixin, ListView):
         queryset = Appointment.objects.filter(doctor=self.request.user)
         return queryset
 
-class detail_appointment(PermissionRequiredMixin, UpdateView):
-    permission_required = 'accounts.view_appointment'
-
-    model = Appointment
-    form_class = approve_appointment
-    template_name = 'accounts/doctor_appointment_view.html'
-    context_object_name = 'ap'
+from django.core.exceptions import PermissionDenied
+def detail_appointment(request,pk):
+    query = Appointment.objects.get(id=pk)
+    if request.method=='GET':
+        if request.user.groups.filter(name='Doctors') and str(request.user)==str(query.doctor):
+            context = {}
+            if query.approved_for == None:
+                form = approve_appointment(instance=query)
+                context['form'] = form
+            else:
+                context['patient'] = query.patient
+                context['day1'] = query.day1
+                context['day2'] = query.day2
+                context['day3'] = query.day3
+                context['message'] = query.message
+                context['approved_for'] = query.day1 if query.approved_for==1 else query.day2 if query.approved_for==2 else query.day3
+                context['approved_time'] = query.approved_time
+            return render(request,'accounts/doctor_appointment_view.html',context=context)
+        else:
+            raise PermissionDenied
+    else:
+        query.approved_for=request.POST.get('approved_for')
+        query.approved_time=request.POST.get('approved_time')
+        query.save()
+        return redirect('accounts:see_schedule')
