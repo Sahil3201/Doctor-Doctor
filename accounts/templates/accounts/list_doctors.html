@@ -1,13 +1,18 @@
 {% extends "DoctorDoctor/base.html" %}
 
-{% block title_page %}doctors{% endblock %}
-{% block title %}doctors - DoctorDoctor{% endblock %}
-{% block title_in_li %}AT doctors{% endblock %}
+{% block title_page %}Doctors{% endblock %}
+{% block title %}Doctors - DoctorDoctor{% endblock %}
+{% block title_in_li %}Doctors{% endblock %}
 
 {% block inner_page %}
 <ol>
-{% for i in doctors %}
-<li>{{i.email}}</li>
-{% endfor %}
+    {% for i in doctors %}
+    <li>
+        <a href="{% url 'accounts:see_public_profile' pk=i.id %}">{{i.email}}</a>
+        {% if i.speciality %}<br>speciality: {{i.speciality}}{% endif %}
+        {% if i.experience_years %}<br>experience years: {{i.experience_years}}{% endif %}
+        {% if i.college %}<br>college: {{i.college}}{% endif %}
+    </li>
+    {% endfor %}
 </ol>
 {% endblock %}

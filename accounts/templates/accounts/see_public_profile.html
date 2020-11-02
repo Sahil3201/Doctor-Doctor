@@ -24,5 +24,7 @@ Email: {{fields.email}}
 {% if fields.speciality %}<br>speciality: {{fields.speciality}}{% endif %}
 {% if fields.college %}<br>college: {{fields.college}}{% endif %}
 {% if fields.experience_years %}<br>experience_years: {{fields.experience_years}}{% endif %}
+
+<br><a href="{% url 'list_doctors' %}">&lt;&lt; List of doctors</a>
 <br><br>
 {% endblock %}
