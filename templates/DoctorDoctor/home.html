@@ -708,7 +708,7 @@
         </section> End Gallery Section -->
 
         {% endcomment %}
-
+        {% comment %}
         <!-- ======= Frequently Asked Questioins Section ======= -->
         <section id="faq" class="faq section-bg">
             <div class="container" data-aos="fade-up">
@@ -760,6 +760,46 @@
                                 delivery
                                 vehicle.
                             </p>
+                        </div>
+                    </li>
+
+
+
+                </ul>
+
+            </div>
+        </section><!-- End Frequently Asked Questioins Section -->{% endcomment %}
+        <!-- ======= Frequently Asked Questioins Section ======= -->
+        <section id="faq" class="faq section-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Latest News</h2>
+                </div>
+
+                <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">
+
+                    <li>
+                        <a data-toggle="collapse" class="" href="#faq1">{{news_1_title}} <i class="icofont-simple-up"></i></a>
+                        <div id="faq1" class="collapse show" data-parent=".faq-list">
+                            <p>{{news_1_des}}</p>
+                            <p><a href="{{news_1_url}}"  target="_blank">Read the full article at {{news_1_name}} website!</a></p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a data-toggle="collapse" href="#faq2" class="collapsed">{{news_2_title}} <i class="icofont-simple-up"></i></a>
+                        <div id="faq2" class="collapse" data-parent=".faq-list">
+                            <p>{{news_2_des}}</p>
+                            <p><a href="{{news_2_url}}"  target="_blank">Read the full article at {{news_2_name}} website!</a></p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a data-toggle="collapse" href="#faq3" class="collapsed">{{news_3_title}} <i class="icofont-simple-up"></i></a>
+                        <div id="faq3" class="collapse" data-parent=".faq-list">
+                            <p>{{news_3_des}}</p>
+                            <p><a href="{{news_3_url}}"  target="_blank">Read the full article at {{news_3_name}} website!</a></p>
                         </div>
                     </li>
 
