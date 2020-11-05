@@ -5,7 +5,7 @@
 {% block title_in_li %}Appointment Requests{% endblock %}
 
 {% block inner_page %}
-Here are the Appointment Requests 
+Here are the Appointment Requests:
 <ol>
     {% for a in schedule %}
     <li>
@@ -24,6 +24,8 @@ Here are the Appointment Requests
         {% endif %}
         <br><a href="{% url 'accounts:detail_appointment' pk=a.id %}">view!</a><hr>
     </li>
+    {% empty %}
+    Sorry, no appointments in this list.
     {% endfor %}
 </ol>
 {% endblock %}

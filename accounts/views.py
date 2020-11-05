@@ -141,7 +141,7 @@ class doctor_user_update( UpdateView):
     model = Doctor
     template_name = 'accounts/profile_update.html'
     success_url = reverse_lazy('accounts:profile')
-    form_class = UpdateViewForm
+    form_class = DoctorUpdateViewForm
     def get_context_data(self, **kwargs):
         return super().get_context_data(**kwargs)
 
@@ -149,10 +149,10 @@ class doctor_user_update( UpdateView):
         user = self.request.user
         queryset = Doctor.objects.filter(customuser_ptr_id=user.id)
         return queryset
-    
-    # def get_object(self):
-    #     user = self.request.user
-    #     return get_object_or_404(Doctor, id=user.id)
+
+    def get_object(self):
+        user = self.request.user
+        return get_object_or_404(Doctor, id=user.id)
 
 class active_appointments(PermissionRequiredMixin, ListView):
     permission_required = 'accounts:add_appointemnt'
@@ -173,6 +173,17 @@ class make_appointment(PermissionRequiredMixin, CreateView):
     form_class = make_appointment_form
     template_name = 'accounts/make_appointment.html'
     success_url = reverse_lazy('accounts:active_appointments')
+
+    # def get_initial(self):
+    #     return super().get_initial()
+
+    def get_form_kwargs(self):
+        s = super().get_form_kwargs()
+        if self.kwargs.get('id'):
+            # print(self.kwargs.get('id'))
+            # print(super().get_form_kwargs())
+            s['initial']['doctor'] = Doctor.objects.get(id=self.kwargs.get('id'))
+        return s
 
     def form_valid(self, form):
         print('\n\n\n\nin form_valid')
@@ -197,15 +208,15 @@ def detail_appointment(request,pk):
     if request.method=='GET':
         if request.user.groups.filter(name='Doctors') and str(request.user)==str(query.doctor):
             context = {}
+            context['patient'] = query.patient
+            context['day1'] = query.day1
+            context['day2'] = query.day2
+            context['day3'] = query.day3
+            context['message'] = query.message
             if query.approved_for == None:
                 form = approve_appointment(instance=query)
                 context['form'] = form
             else:
-                context['patient'] = query.patient
-                context['day1'] = query.day1
-                context['day2'] = query.day2
-                context['day3'] = query.day3
-                context['message'] = query.message
                 context['approved_for'] = query.day1 if query.approved_for==1 else query.day2 if query.approved_for==2 else query.day3
                 context['approved_time'] = query.approved_time
             return render(request,'accounts/doctor_appointment_view.html',context=context)

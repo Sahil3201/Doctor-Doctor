@@ -12,6 +12,7 @@ urlpatterns = [
 	url(r'^accounts/profile/update/$',views.user_update.as_view(),name='user_update'),
 	url(r'^accounts/profile/update/doctor/$',views.doctor_user_update.as_view(),name='doctor_user_update'),
 	url(r'^appointments/new/$',views.make_appointment.as_view(),name='make_appointment'),
+	url(r'^appointments/new/(?P<id>[\d]+)/$',views.make_appointment.as_view(),name='make_appointment'),
 	url(r'^appointments/all/$',views.active_appointments.as_view(),name='active_appointments'),
 	url(r'^doctor-portal/see-schedule/$',views.see_schedule.as_view(),name='see_schedule'),
 	url(r'^doctor-portal/detail-appointment/(?P<pk>[\d]+)/$',views.detail_appointment,name='detail_appointment'),

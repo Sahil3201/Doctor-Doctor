@@ -7,12 +7,15 @@
 {% block inner_page %}
 <ol>
     {% for i in doctors %}
-    <li>
-        <a href="{% url 'accounts:see_public_profile' pk=i.id %}">{{i.email}}</a>
-        {% if i.speciality %}<br>speciality: {{i.speciality}}{% endif %}
-        {% if i.experience_years %}<br>experience years: {{i.experience_years}}{% endif %}
-        {% if i.college %}<br>college: {{i.college}}{% endif %}
-    </li>
+    <a href="{% url 'accounts:see_public_profile' pk=i.id %}"><li>
+        {{i.email}}
+        <ul>
+        <li><small>{% if i.speciality %}speciality: {{i.speciality}}{% endif %}</small></li>
+        <li><small>{% if i.experience_years %}experience years: {{i.experience_years}}{% endif %}</small></li>
+        <li><small>{% if i.college %}college: {{i.college}}{% endif %}</small></li>
+    </ul>
+        <hr>
+    </li></a>
     {% endfor %}
 </ol>
 {% endblock %}

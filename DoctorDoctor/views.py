@@ -1,15 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, HttpResponseRedirect, reverse, HttpResponse
 from django.views.generic import TemplateView
 # Create your views here.
 def home(request):
-	if request.method=='POST':
-		return render(request,'DoctorDoctor/home.html')
-	else:
+	# if request.method=='POST':
+	# 	return HttpResponseRedirect(reverse('home'))
+	try:
+		con = {}
+
 		import requests
 		url = ('https://newsapi.org/v2/top-headlines?category=health&country=in&q=covid&q=india&apiKey=e3723180c39644e791fa3b87cc5fe5f2')
 		response = requests.get(url)
-
-		con = {}
 
 		con['news_1_name'] = response.json()['articles'][0]['source']['name']
 		con['news_1_title'] = response.json()['articles'][0]['title']
@@ -25,6 +25,9 @@ def home(request):
 		con['news_3_title'] = response.json()['articles'][2]['title']
 		con['news_3_url'] = response.json()['articles'][2]['url']
 		con['news_3_des'] = response.json()['articles'][2]['description']
+	except :
+		pass
+	finally:
 		return render(request,'DoctorDoctor/home.html',context=con)
 
 class departments(TemplateView):

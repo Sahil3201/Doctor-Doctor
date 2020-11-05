@@ -26,5 +26,6 @@ Email: {{fields.email}}
 {% if fields.experience_years %}<br>experience_years: {{fields.experience_years}}{% endif %}
 
 <br><a href="{% url 'list_doctors' %}">&lt;&lt; List of doctors</a>
+<br><a href="{% url 'accounts:make_appointment' id=fields.id %}">&gt;&gt; Make an appointment {%if fields.fullname %} with {{fields.fullname}}{% endif %}</a>
 <br><br>
 {% endblock %}

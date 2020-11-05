@@ -128,7 +128,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-LOGIN_URL = 'accounts/login'
+LOGIN_URL = '/accounts/login'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR,]
