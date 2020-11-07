@@ -1,3 +1,4 @@
+from .models import *
 from .decorators import *
 from .forms import *
 
@@ -116,7 +117,6 @@ def welcome_email(email):
 
 
 from django.views.generic.edit import UpdateView
-from .models import *
 from django.shortcuts import get_object_or_404
 from accounts.forms import *
 
@@ -227,3 +227,18 @@ def detail_appointment(request,pk):
         query.approved_time=request.POST.get('approved_time')
         query.save()
         return redirect('accounts:see_schedule')
+
+
+class past_appointment(ListView):
+    # permission_required = 'accounts.view_appointment'
+
+    model = Appointment
+    template_name = 'accounts/past_appointments.html'
+    context_object_name = 'past'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = Appointment.objects.filter(patient=self.request.user)
+        print(queryset)
+        return queryset
+
