@@ -154,12 +154,6 @@ class doctor_user_update( UpdateView):
         user = self.request.user
         return get_object_or_404(Doctor, id=user.id)
 
-class active_appointments(PermissionRequiredMixin, ListView):
-    permission_required = 'accounts:add_appointemnt'
-    
-    model = Appointment
-    context_object_name = 'appointments'
-
 class list_doctors(ListView):
     model = Doctor
     template_name = 'accounts/list_doctors.html'
@@ -169,10 +163,9 @@ from django.views.generic.edit import FormView
 class make_appointment(PermissionRequiredMixin, CreateView):
     permission_required = 'accounts.add_appointment'
 
-    # success_url = reverse('accounts:active_appointments')
     form_class = make_appointment_form
     template_name = 'accounts/make_appointment.html'
-    success_url = reverse_lazy('accounts:active_appointments')
+    success_url = reverse_lazy('accounts:past_appointment')
 
     # def get_initial(self):
     #     return super().get_initial()
@@ -206,28 +199,47 @@ from django.core.exceptions import PermissionDenied
 def detail_appointment(request,pk):
     query = Appointment.objects.get(id=pk)
     if request.method=='GET':
-        if request.user.groups.filter(name='Doctors') and str(request.user)==str(query.doctor):
-            context = {}
+        context = {}
+        context['day1'] = query.day1
+        context['day2'] = query.day2
+        context['day3'] = query.day3
+        context['message'] = query.message
+
+        if str(request.user)==str(query.doctor):
             context['patient'] = query.patient
-            context['day1'] = query.day1
-            context['day2'] = query.day2
-            context['day3'] = query.day3
-            context['message'] = query.message
             if query.approved_for == None:
                 form = approve_appointment(instance=query)
                 context['form'] = form
             else:
                 context['approved_for'] = query.day1 if query.approved_for==1 else query.day2 if query.approved_for==2 else query.day3
                 context['approved_time'] = query.approved_time
+                if query.prescription == None:
+                    form = write_prescription_form(instance=query)
+                    context['form'] = form
+                else:
+                    context['prescription'] = query.prescription
             return render(request,'accounts/doctor_appointment_view.html',context=context)
+        elif str(request.user) == str(query.patient):
+            context['doctor'] = query.doctor
+            if not query.approved_for == None:
+                context['approved_for'] = query.day1 if query.approved_for==1 else query.day2 if query.approved_for==2 else query.day3
+                context['approved_time'] = query.approved_time
+            if not query.prescription == None:
+                context['prescription'] = query.prescription
+            return render(request,'accounts/appointment_view.html',context=context)
         else:
             raise PermissionDenied
-    else:
-        query.approved_for=request.POST.get('approved_for')
-        query.approved_time=request.POST.get('approved_time')
-        query.save()
-        return redirect('accounts:see_schedule')
 
+    else:
+        if query.approved_for:
+            query.prescription = request.POST.get('prescription')
+            query.save()
+            return redirect('accounts:detail_appointment', pk=query.id)
+        else:
+            query.approved_for=request.POST.get('approved_for')
+            query.approved_time=request.POST.get('approved_time')
+            query.save()
+            return redirect('accounts:see_schedule')
 
 class past_appointment(ListView):
     # permission_required = 'accounts.view_appointment'

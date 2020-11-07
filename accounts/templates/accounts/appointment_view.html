@@ -15,42 +15,23 @@
 
 
 {% block inner_page %}
-<form method="POST">
-    {% csrf_token %}
-
-    {% if form.errors %}
-    {% for field in form %}
-    {% for error in field.errors %}
-    <div class="alert alert-danger">
-        <strong>{{ error|escape }}</strong>
-    </div>
-    {% endfor %}
-    {% endfor %}
-    {% for error in form.non_field_errors %}
-    <div class="alert alert-danger">
-        <strong>{{ error|escape }}</strong>
-    </div>
-    {% endfor %}
-    {% endif %}
-
-    <h1>approve the Appointment!</h1>
-    patient: {{patient}}<br>
-    message: {{message}}{{form.message}}<br>
-    {% if form.approved_for %}
+    <h1>Apointment</h1>
+    Doctor: {{doctor}}<br>
+    
+    {% if approved_for %}
+    Approved appointment date: <u><strong>{{approved_for}}</strong></u> at <u><strong>{{approved_time}}</strong></u><br>
+    {% else %}
     day1: {{day1}}<br>
     day2: {{day2}}<br>
     day3: {{day3}}<br>
-    Approve appointment date: <u><strong>{{form.approved_for}}</strong></u> at <u><strong>{{form.approved_time}}</strong></u><br>
-    <input type="submit" value="Submit">
-    {% elif form.prescription %}
-    Approved appointment date: <u><strong>{{approved_for}}</strong></u> at <u><strong>{{approved_time}}</strong></u><br>
-    {{form.prescription}}
-    <input type="submit" value="Submit">
-    {% else %}
-    Approved appointment date: <u><strong>{{approved_for}}</strong></u> at <u><strong>{{approved_time}}</strong></u><br>
+    {% endif %}
+    
+    message: {{message}}<br>
+
+    {% if prescription %}
     {{prescription}}
     {% endif %}
-</form>
+    
 {% endblock %}
 
 

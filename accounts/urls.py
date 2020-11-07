@@ -13,9 +13,9 @@ urlpatterns = [
 	url(r'^accounts/profile/update/doctor/$',views.doctor_user_update.as_view(),name='doctor_user_update'),
 	url(r'^appointments/new/$',views.make_appointment.as_view(),name='make_appointment'),
 	url(r'^appointments/new/(?P<id>[\d]+)/$',views.make_appointment.as_view(),name='make_appointment'),
-	url(r'^appointments/all/$',views.active_appointments.as_view(),name='active_appointments'),
+	# url(r'^appointments/all/$',views.active_appointments.as_view(),name='active_appointments'),
 	url(r'^doctor-portal/see-schedule/$',views.see_schedule.as_view(),name='see_schedule'),
-	url(r'^appointments/list-old/$',views.past_appointment.as_view(),name='past_appointment'),
+	url(r'^appointments/list-all/$',views.past_appointment.as_view(),name='past_appointment'),
 	url(r'^doctor-portal/detail-appointment/(?P<pk>[\d]+)/$',views.detail_appointment,name='detail_appointment'),
 	url(r'^see-profile/(?P<pk>[\d]+)/$',views.see_public_profile.as_view(),name='see_public_profile'),
 ]

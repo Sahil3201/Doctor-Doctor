@@ -116,3 +116,8 @@ class approve_appointment(forms.ModelForm):
         model = Appointment
         fields = ('approved_for','approved_time')
         # widget={'message':forms.Textarea()}
+
+class write_prescription_form(forms.ModelForm):
+    class Meta:
+        model = Appointment
+        fields = ('prescription',)

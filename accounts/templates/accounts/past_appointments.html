@@ -37,8 +37,12 @@
         {% endif %}
 
         <br>Message: {{p.message}}
+        {% if p.prescription %} <br><i class="icofont-tick-boxed"></i> Prescribed {% endif %}
+        <br><a href="{% url 'accounts:detail_appointment' pk=p.id %}">VIEW!</a>
     </li>
     <hr>
+    {% empty %}
+    Make an Appointment to see one here!
     {% endfor %}
 </ol>
 {% endblock %}

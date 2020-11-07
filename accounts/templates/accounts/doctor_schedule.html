@@ -22,7 +22,8 @@ Here are the Appointment Requests:
         Day 3: {{a.day3}}<br>
         <i class="icofont-close-squared-alt"></i> Not yet approved!
         {% endif %}
-        <br><a href="{% url 'accounts:detail_appointment' pk=a.id %}">view!</a><hr>
+        {% if a.prescription %}<br><i class="icofont-tick-boxed"></i> Prescribed {% endif %}
+        <br><a href="{% url 'accounts:detail_appointment' pk=a.id %}">View!</a><hr>
     </li>
     {% empty %}
     Sorry, no appointments in this list.

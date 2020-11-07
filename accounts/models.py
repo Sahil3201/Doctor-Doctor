@@ -114,6 +114,7 @@ class Appointment(models.Model):
     message         = models.CharField(blank=True, null=True, max_length=512)
     approved_for    = models.CharField(blank=True, editable=True,null=True, max_length=10)
     approved_time   = models.CharField(blank=True, editable=True,null=True, max_length=10)
+    prescription    = models.CharField(blank=True, editable=True,null=True, max_length=1000)
     
     class Meta:
         verbose_name = 'Appointment'
