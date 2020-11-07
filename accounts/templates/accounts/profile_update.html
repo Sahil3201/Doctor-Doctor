@@ -1,5 +1,6 @@
 {% extends "DoctorDoctor/base.html" %}
 {% load static %}
+{% load profile_tags %}
 
 {% block title_page %}Update Profile{% endblock %}
 {% block title %}Update Profile - DoctorDoctor{% endblock %}
@@ -51,6 +52,13 @@
     {% endif %}
     <input type="submit" value="Submit">
 </form>
+<br>
+{% if request.user|has_group:"Doctors" %}
+<a href="{% url 'accounts:see_public_profile' %}" class="appointment-btn">Cancel/a>
+{% else %}
+<a href="{% url 'accounts:profile' %}" class="appointment-btn">Cancel</a>
+{% endif %}
+
 {% endblock %}
 {% block js_section %}
 <script type="text/javascript" src="/admin/jsi18n/"></script>
