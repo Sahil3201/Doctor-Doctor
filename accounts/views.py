@@ -255,6 +255,7 @@ class past_appointment(ListView):
         return queryset
 
 def predict_heart_disease(request):
+    context = {}
     if request.method == 'POST':
         form = heart_disease_predict_form()
         age=request.POST.get("age")
@@ -275,13 +276,14 @@ def predict_heart_disease(request):
         pred = model.predict([[int(age),int(gender),float(cp),int(trestbps),int(chol),int(fbs),int(restecg),int(lach),int(exang),float(oldpeak),int(slope),int(ca),int(thal)]])
         
         if pred == 0 :
-            print("Patient has a heart problem")
+            context['prediction'] = "Patient has a heart problem"
         else:
-            print("Patient is healthy")
+            context['prediction'] = "Patient is healthy"
 
-    return render(request,'accounts/heart_disease_predict.html')
+    return render(request,'accounts/heart_disease_predict.html',context=context)
 
 def diabetes_predict(request):
+    context = {}
     if request.method == 'POST':
         pregnancies=request.POST.get("pregnancies")
         glucose=request.POST.get("glucose")
@@ -297,7 +299,7 @@ def diabetes_predict(request):
         pred = model.predict([[int(pregnancies),int(glucose),float(bp),int(skin_thickness),int(insulin),float(bmi),float(dpf),int(age)]])
 
         if pred == 1 :
-            print("Patient has Diabetes")
+            context['prediction'] = "Patient has Diabetes"
         else:
-            print("Patient is healthy")
-    return render(request, 'accounts/predict_diabetes.html')
+            context['prediction'] = "Patient is healthy"
+    return render(request, 'accounts/predict_diabetes.html',context=context)

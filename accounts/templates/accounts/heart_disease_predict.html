@@ -217,3 +217,11 @@
 
 
 {% endblock %}
+
+{% block js_section %}
+{% if prediction %}
+<script>
+  alert("{{prediction}}")
+</script>
+{% endif %}
+{% endblock %}
