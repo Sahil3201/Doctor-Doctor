@@ -18,4 +18,8 @@ urlpatterns = [
 	url(r'^doctor-portal/see-schedule/$',views.see_schedule.as_view(),name='see_schedule'),
 	url(r'^doctor-portal/detail-appointment/(?P<pk>[\d]+)/$',views.detail_appointment,name='detail_appointment'),
 	url(r'^see-profile/(?P<pk>[\d]+)/$',views.see_public_profile.as_view(),name='see_public_profile'),
+
+
+	url(r'^predict_heart_disease/$',views.predict_heart_disease,name='predict_heart_disease'),
+	url(r'^diabetes_predict/$',views.diabetes_predict,name='diabetes_predict'),
 ]

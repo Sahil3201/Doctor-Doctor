@@ -59,7 +59,15 @@
                     <li><a href="{% url 'home' %}">Home</a></li>
                     <li><a href="{% url 'home' %}#about">About</a></li>
                     <li><a href="{% url 'home' %}#services">Services</a></li>
-                    <li><a href="{% url 'departments' %}">Departments</a></li>
+                    
+                    <li class="drop-down">
+                        <a>Predictor</a>
+                        <ul>
+                            <li><a href="{% url 'accounts:predict_heart_disease' %}">Heart Disease Predictor</a></li>
+                            <li><a href="{% url 'accounts:diabetes_predict' %}">Diabetes Predictor</a></li>
+                        </ul>
+                    </li>
+
                     <li><a href="{% url 'list_doctors' %}">Doctors</a></li>
                     <!-- <li class="drop-down"><a href="">Drop Down</a>
           <ul>

@@ -30,8 +30,5 @@ def home(request):
 	finally:
 		return render(request,'DoctorDoctor/home.html',context=con)
 
-class departments(TemplateView):
-	template_name='DoctorDoctor/departments.html'
-
 class doctors(TemplateView):
 	template_name='DoctorDoctor/doctors.html'

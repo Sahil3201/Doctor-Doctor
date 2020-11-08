@@ -125,8 +125,8 @@ class user_update( UpdateView):
     template_name = 'accounts/profile_update.html'
     success_url = reverse_lazy('accounts:profile')
     form_class = UpdateViewForm
-    def get_context_data(self, **kwargs):
-        return super().get_context_data(**kwargs)
+    # def get_context_data(self, **kwargs):
+    #     return super().get_context_data(**kwargs)
 
     def get_queryset(self):
         user = self.request.user
@@ -254,3 +254,50 @@ class past_appointment(ListView):
         print(queryset)
         return queryset
 
+def predict_heart_disease(request):
+    if request.method == 'POST':
+        form = heart_disease_predict_form()
+        age=request.POST.get("age")
+        gender=request.POST.get("gender")
+        cp=request.POST.get("cp")
+        trestbps=request.POST.get("trestbps")
+        chol=request.POST.get("chol")
+        fbs=request.POST.get("fbs")
+        restecg=request.POST.get("restecg")
+        lach=request.POST.get("lach")
+        exang=request.POST.get("exang")
+        oldpeak=request.POST.get("oldpeak")
+        slope=request.POST.get("slope")
+        ca=request.POST.get("ca")
+        thal=request.POST.get("thal")
+        import pickle
+        model = pickle.load(open('./ML/LogisticRegression.pkl','rb'))
+        pred = model.predict([[int(age),int(gender),float(cp),int(trestbps),int(chol),int(fbs),int(restecg),int(lach),int(exang),float(oldpeak),int(slope),int(ca),int(thal)]])
+        
+        if pred == 0 :
+            print("Patient has a heart problem")
+        else:
+            print("Patient is healthy")
+
+    return render(request,'accounts/heart_disease_predict.html')
+
+def diabetes_predict(request):
+    if request.method == 'POST':
+        pregnancies=request.POST.get("pregnancies")
+        glucose=request.POST.get("glucose")
+        bp=request.POST.get("bp")
+        skin_thickness=request.POST.get("skin_thickness")
+        insulin=request.POST.get("insulin")
+        bmi=request.POST.get("bmi")
+        dpf=request.POST.get("dpf")
+        age=request.POST.get("age")
+
+        import pickle
+        model = pickle.load(open('./ML/Random_Forest.pkl','rb'))
+        pred = model.predict([[int(pregnancies),int(glucose),float(bp),int(skin_thickness),int(insulin),float(bmi),float(dpf),int(age)]])
+
+        if pred == 1 :
+            print("Patient has Diabetes")
+        else:
+            print("Patient is healthy")
+    return render(request, 'accounts/predict_diabetes.html')

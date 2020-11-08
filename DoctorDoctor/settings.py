@@ -29,7 +29,7 @@ SECRET_KEY = 'watv-ux=5szkb-pj71!2dp0x(tlrow$^ru+um4$7ig_-@rmom2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition

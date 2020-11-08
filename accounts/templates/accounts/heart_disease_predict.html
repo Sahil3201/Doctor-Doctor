@@ -1,0 +1,219 @@
+{% extends "DoctorDoctor/base.html" %}
+
+{% block title_page %}heart_disease_predict{% endblock %}
+{% block title %}heart_disease_predict - DoctorDoctor{% endblock %}
+{% block title_in_li %}heart_disease_predict{% endblock %}
+
+{% block css_section %}
+<style>
+  body {
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 12px;
+    line-height: 20px;
+    color: #777;
+
+  }
+
+  /* .container {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+  } */
+
+  #contact input[type="text"],
+  #contact input[type="number"],
+
+  #contact textarea,
+  #contact button[type="submit"] {
+    font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
+  }
+
+  /* #contact {
+    background: #F9F9F9;
+    padding: 25px;
+    margin: 50px 0;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  } */
+
+  fieldset {
+    border: medium none !important;
+    margin: 0 0 5px;
+    min-width: 100%;
+    padding: 0;
+    width: 100%;
+  }
+
+  #contact input[type="text"],
+  #contact input[type="number"],
+  #contact textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    background: #FFF;
+    margin: 0 0 5px;
+    padding: 10px;
+  }
+
+  #contact textarea {
+    height: 100px;
+    max-width: 100%;
+    resize: none;
+  }
+
+  #contact button[type="submit"] {
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    background: #4CAF50;
+    color: #FFF;
+    margin: 0 0 5px;
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  #contact button[type="submit"]:hover {
+    background: #43A047;
+    -webkit-transition: background 0.3s ease-in-out;
+    -moz-transition: background 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  #contact button[type="submit"]:active {
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+</style>
+{% endblock %}
+
+
+{% block inner_page %}
+<div class="container">
+  <form method="POST" id="contact">
+    {% csrf_token %}
+    <fieldset>
+      <input type="number" id="age" name="age" placeholder="Enter your age">
+    </fieldset>
+
+    <br />
+
+    <fieldset>
+      <legend>Choose your Gender:</legend>
+      <label for="male">Male</label>
+      <input type="radio" name="gender" value="1">
+      <label for="female">Female</label>
+      <input type="radio" name="gender" value="0">
+    </fieldset>
+
+    <br />
+
+    <fieldset>
+      <input type="text" name="cp" placeholder="Chest pain">
+    </fieldset>
+
+    <br />
+
+    <fieldset>
+      <input type="text" name="trestbps" placeholder="Resting blood pressure">
+    </fieldset>
+
+    <br />
+
+    <fieldset>
+
+      <input type="text" name="chol" placeholder="Serum Cholestoral in mg/dl">
+    </fieldset>
+
+    <br />
+
+    <fieldset>
+      <legend>Is fasting blood Sugar > 120 mg/dl:</legend>
+      <label for="val_0">0</label>
+      <input type="radio" name="fbs" value="0">
+      <label for="val_1">1</label>
+      <input type="radio" name="fbs" value="1">
+    </fieldset>
+
+    <br />
+
+    <fieldset>
+      <legend>Resting Electrocardiographic Results:</legend>
+      <label for="restecg_0">0</label>
+      <input type="radio" name="restecg" value="0">
+      <label for="restecg_1">1</label>
+      <input type="radio" name="restecg" value="1">
+      <label for="restecg_2">2</label>
+      <input type="radio" name="restecg" value="2">
+    </fieldset>
+
+    <br />
+
+    <fieldset>
+      <input type="text" name="lach" placeholder="Maximum Heart Rate Achieved">
+    </fieldset>
+
+    <br />
+
+    <fieldset>
+      <legend>Exercise induced angina:</legend>
+      <label for="eia_1">0</label>
+      <input type="radio" name="exang" value="0">
+      <label for="eia_1">1</label>
+      <input type="radio" name="exang" value="1">
+    </fieldset>
+
+    <br />
+
+    <fieldset>
+      <input type="text" id="oldpeak" name="oldpeak" placeholder="ST depression induced by exercise relative to rest">
+    </fieldset>
+
+    <br />
+
+    <fieldset>
+      <legend>The slope of the peak exercise ST segment:</legend>
+      <label for="slope_0">0</label>
+      <input type="radio" name="slope" value="0">
+      <label for="slope_1">1</label>
+      <input type="radio" name="slope" value="1">
+      <label for="slope_2">2</label>
+      <input type="radio" name="slope" value="2">
+    </fieldset>
+
+    <br />
+
+    <fieldset>
+      <legend>Number of major vessels (0-3) colored by flourosopy:</legend>
+      <label for="ca_0">0</label>
+      <input type="radio" name="ca" value="0">
+      <label for="ca_1">1</label>
+      <input type="radio" name="ca" value="1">
+      <label for="ca_2">2</label>
+      <input type="radio" name="ca" value="2">
+      <label for="ca_3">3</label>
+      <input type="radio" name="ca" value="3">
+    </fieldset>
+
+    <br />
+
+    <fieldset>
+      <legend>Thal:</legend>
+      <label for="thal_1">1</label>
+      <input type="radio" name="thal" value="1">
+      <label for="thal_2">2</label>
+      <input type="radio" name="thal" value="2">
+      <label for="thal_3">3</label>
+      <input type="radio" name="thal" value="3">
+      <label for="thal_6">6</label>
+      <input type="radio" name="thal" value="6">
+      <label for="thal_7">7</label>
+      <input type="radio" name="thal" value="7">
+    </fieldset>
+
+    <br />
+
+    <button type="submit">Get Prediction</button>
+  </form>
+</div>
+
+
+{% endblock %}

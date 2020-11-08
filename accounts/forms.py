@@ -121,3 +121,31 @@ class write_prescription_form(forms.ModelForm):
     class Meta:
         model = Appointment
         fields = ('prescription',)
+
+
+# [[int(pregnancies),int(glucose),float(bp),int(skin_thickness),int(insulin),float(bmi),float(dpf),int(age)]]
+class heart_disease_predict_form(forms.Form):
+    pregnancies = forms.IntegerField()
+    glucose = forms.IntegerField()
+    bp = forms.FloatField()
+    skin_thickness = forms.IntegerField()
+    insulin = forms.IntegerField()
+    bmi = forms.FloatField()
+    dpf = forms.FloatField()
+    age = forms.IntegerField()
+
+# [[int(age),int(gender),float(cp),int(trestbps),int(chol),int(fbs),int(restecg),int(lach),int(exang),float(oldpeak),int(slope),int(ca),int(thal)]]
+class diabetes_predict_form(forms.Form):
+    age = forms.IntegerField()
+    gender = forms.IntegerField()
+    cp = forms.FloatField()
+    trestbps = forms.IntegerField()
+    chol = forms.IntegerField()
+    fbs = forms.IntegerField()
+    restecg = forms.IntegerField()
+    lach = forms.IntegerField()
+    exang = forms.IntegerField()
+    oldpeak = forms.FloatField()
+    slope = forms.IntegerField()
+    ca = forms.IntegerField()
+    thal = forms.IntegerField()
