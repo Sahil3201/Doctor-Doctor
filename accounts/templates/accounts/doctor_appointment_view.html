@@ -33,23 +33,33 @@
     {% endfor %}
     {% endif %}
 
-    <h1>approve the Appointment!</h1>
+    {% if form.approved_for %}
+    <h1>Approve the Appointment!</h1>
     patient: {{patient}}<br>
     message: {{message}}{{form.message}}<br>
-    {% if form.approved_for %}
     day1: {{day1}}<br>
     day2: {{day2}}<br>
     day3: {{day3}}<br>
     Approve appointment date: <u><strong>{{form.approved_for}}</strong></u> at <u><strong>{{form.approved_time}}</strong></u><br>
     <input type="submit" value="Submit">
+
     {% elif form.prescription %}
+    <h1>See appointmentment details</h1>
+    patient: {{patient}}<br>
+    message: {{message}}{{form.message}}<br>
     Approved appointment date: <u><strong>{{approved_for}}</strong></u> at <u><strong>{{approved_time}}</strong></u><br>
     {{form.prescription}}
     <input type="submit" value="Submit">
     {% else %}
-    Approved appointment date: <u><strong>{{approved_for}}</strong></u> at <u><strong>{{approved_time}}</strong></u><br>
-    {{prescription}}
+    patient: {{patient}}<br>
+    message: {{message}}{{form.message}}<br>
+    Approved appointment date: <u><strong>{{approved_for}}</strong></u> at <u><strong>{{approved_time}}</strong></u><br><br>
+    Prescription: <br> {{prescription}}
     {% endif %}
+
+<a href="{% url 'accounts:patient_profile' id=p_id %}">See customer history</a>
+
+
 </form>
 {% endblock %}
 

@@ -98,9 +98,19 @@ def profile(request):
         queryset = get_user_type(request.user).objects.filter(customuser_ptr_id=request.user.id)
         # context['allergies'] = queryset.get().allergies
         context['fields'] = queryset.get()
+        context['appointments'] = Appointment.objects.filter(patient=request.user.id)
         return render(request, 'accounts/profile.html',context)
     else:
         return HttpResponseRedirect(reverse('accounts:login'))
+
+def patient_profile(request,id):
+    context = {}
+    queryset = Patient.objects.filter(customuser_ptr_id=id)
+    # context['allergies'] = queryset.get().allergies
+    context['appointments'] = Appointment.objects.filter(patient=id)
+    context['fields'] = queryset.get()
+    context['patient_profile'] = 'y'
+    return render(request, 'accounts/profile.html',context)
 
 # Email
 from DoctorDoctor.settings import EMAIL_HOST_USER
@@ -204,7 +214,7 @@ def detail_appointment(request,pk):
         context['day2'] = query.day2
         context['day3'] = query.day3
         context['message'] = query.message
-
+        context['p_id'] = query.patient.id
         if str(request.user)==str(query.doctor):
             context['patient'] = query.patient
             if query.approved_for == None:

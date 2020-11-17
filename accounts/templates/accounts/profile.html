@@ -8,30 +8,80 @@
 {% block inner_page %}
 
 <table>
-<tr>
-<td>Email: </td><td>{{fields.email}}</td>
-</tr>
-<tr>{% if fields.fullname%} <td>Fullname: </td> <td>{{fields.fullname}}{% endif%}</td></tr>
-<tr>{% if fields.date_of_birth%} <td>Date of birth: </td> <td>{{fields.date_of_birth}}{% endif%}</td></tr>
-<tr>{% if fields.phone_number%} <td>Phone Number: </td> <td>{{fields.phone_number}}{% endif%}</td></tr>
-<tr>{% if fields.blood_group%} <td>Blood group: </td> <td>{{fields.blood_group|full_blood_group}}{% endif%}</td></tr>
-<tr>{% if fields.allergies%} <td>Allergies: </td> <td>{{fields.allergies}}{% endif%}</td></tr>
-<tr>{% if fields.marital_status%} <td>Marital Status: </td> <td>{{fields.marital_status|full_marital_status}}{% endif%}</td></tr>
-<tr>{% if fields.emergency_Name%} <td>Emergency Name: </td> <td>{{fields.emergency_Name}}{% endif%}</td></tr>
-<tr>{% if fields.emergency_phone_number%} <td>Emergency phone number: </td> <td>{{fields.emergency_phone_number}}{% endif%}</td></tr>
-<tr>{% if fields.emergency_relationship%} <td>Emergency relationship: </td> <td>{{fields.emergency_relationship}}{% endif%}</td></tr>
-<tr>{% if fields.insurance_id%} <td>Insurance id: </td> <td>{{fields.insurance_id}}{% endif%}</td></tr>
-<tr>{% if fields.insurance_company%} <td>Insurance company: </td> <td>{{fields.insurance_company}}{% endif%}</td></tr>
-<tr>{% if fields.insurance_validity%} <td>Insurance validity: </td> <td>{{fields.insurance_validity}}{% endif%}</td></tr>
-<tr>{% if fields.speciality %} <td>Speciality: </td> <td>{{fields.speciality}}{% endif %}</td></tr>
-<tr>{% if fields.college %} <td>College: </td> <td>{{fields.college}}{% endif %}</td></tr>
-<tr>{% if fields.experience_years %} <td>Experience years: </td> <td>{{fields.experience_years}}{% endif %}</td></tr>
+    <tr>
+        <td>Email: </td>
+        <td>{{fields.email}}</td>
+    </tr>
+    <tr>{% if fields.fullname%} <td>Fullname: </td>
+        <td>{{fields.fullname}}{% endif%}</td>
+    </tr>
+    <tr>{% if fields.date_of_birth%} <td>Date of birth: </td>
+        <td>{{fields.date_of_birth}}{% endif%}</td>
+    </tr>
+    <tr>{% if fields.phone_number%} <td>Phone Number: </td>
+        <td>{{fields.phone_number}}{% endif%}</td>
+    </tr>
+    <tr>{% if fields.blood_group%} <td>Blood group: </td>
+        <td>{{fields.blood_group|full_blood_group}}{% endif%}</td>
+    </tr>
+    <tr>{% if fields.allergies%} <td>Allergies: </td>
+        <td>{{fields.allergies}}{% endif%}</td>
+    </tr>
+    <tr>{% if fields.marital_status%} <td>Marital Status: </td>
+        <td>{{fields.marital_status|full_marital_status}}{% endif%}</td>
+    </tr>
+    <tr>{% if fields.emergency_Name%} <td>Emergency Name: </td>
+        <td>{{fields.emergency_Name}}{% endif%}</td>
+    </tr>
+    <tr>{% if fields.emergency_phone_number%} <td>Emergency phone number: </td>
+        <td>{{fields.emergency_phone_number}}{% endif%}</td>
+    </tr>
+    <tr>{% if fields.emergency_relationship%} <td>Emergency relationship: </td>
+        <td>{{fields.emergency_relationship}}{% endif%}</td>
+    </tr>
+    <tr>{% if fields.insurance_id%} <td>Insurance id: </td>
+        <td>{{fields.insurance_id}}{% endif%}</td>
+    </tr>
+    <tr>{% if fields.insurance_company%} <td>Insurance company: </td>
+        <td>{{fields.insurance_company}}{% endif%}</td>
+    </tr>
+    <tr>{% if fields.insurance_validity%} <td>Insurance validity: </td>
+        <td>{{fields.insurance_validity}}{% endif%}</td>
+    </tr>
+    <tr>{% if fields.speciality %} <td>Speciality: </td>
+        <td>{{fields.speciality}}{% endif %}</td>
+    </tr>
+    <tr>{% if fields.college %} <td>College: </td>
+        <td>{{fields.college}}{% endif %}</td>
+    </tr>
+    <tr>{% if fields.experience_years %} <td>Experience years: </td>
+        <td>{{fields.experience_years}}{% endif %}</td>
+    </tr>
 </table>
 
 <br><br>
+{% if patient_profile %}
+
+<ol>
+{% for app in appointments %}
+
+<li>
+Doctor: {{app.doctor}}
+<br> Message: {{app.message}}
+{% if app.approved_for %}<br> Approved appointment date: <u><strong>{{app.approved_for}}</strong></u> at
+<u><strong>{{app.approved_time}}</strong></u><br>{% endif %}
+
+{% if app.prescription %}Prescription:<br>{{app.prescription}}{% endif %}
+</li><hr>
+{% endfor %}
+</ol>
+
+{% else %}
+
 {% if request.user|has_group:"Doctors" %}
 <a href="{% url 'accounts:doctor_user_update' %}" class="appointment-btn">Edit</a>
 {% else %}
 <a href="{% url 'accounts:user_update' %}" class="appointment-btn">Edit</a>
+{% endif %}
 {% endif %}
 {% endblock %}

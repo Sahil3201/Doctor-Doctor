@@ -110,10 +110,15 @@ class Appointment(models.Model):
     def __str__(self):
         return 'For '+str(self.doctor)+' by '+str(self.patient)
 
-class Medicines(models.Model):
-    appointment         = models.ForeignKey(Doctor,related_name='medicines_appointment',on_delete=models.CASCADE)
-    medicine_name       = models.CharField(blank=True, null=True, max_length=512)
+# class Medicines(models.Model):
+#     appointment         = models.ForeignKey(Doctor,related_name='medicines_appointment',on_delete=models.CASCADE)
+#     medicine_name       = models.CharField(blank=True, null=True, max_length=512)
 
-    class Meta:
-        verbose_name = 'Medicine'
+#     class Meta:
+#         verbose_name = 'Medicine'
 
+class Newsletter(models.Model):
+    email = models.EmailField(blank=True,null=True,max_length=100)
+
+    def __str__(self):
+        return self.email

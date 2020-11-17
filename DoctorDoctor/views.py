@@ -1,8 +1,14 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect, reverse, HttpResponse
 from django.views.generic import TemplateView
+from accounts.models import Newsletter
+
 # Create your views here.
 def home(request):
-	# if request.method=='POST':
+	if request.method=='POST':
+		email = request.POST.get('email')
+		newsletter = Newsletter(email=email)
+		newsletter.save()
+		return redirect('home')
 	# 	return HttpResponseRedirect(reverse('home'))
 	try:
 		con = {}
