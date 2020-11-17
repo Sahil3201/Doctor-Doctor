@@ -32,24 +32,24 @@
     
     <table>
     {% if user.is_doctor %}
-        <tr><td>fullname:</td><td> {{form.fullname}}<br></td></tr>
-        <tr><td>date_of_birth:</td><td> {{form.date_of_birth}}<br></td></tr>
-        <tr><td>speciality:</td><td> {{form.speciality}}<br></td></tr>
-        <tr><td>college:</td><td> {{form.college}}<br></td></tr>
-        <tr><td>experience_years:</td><td> {{form.experience_years}}<br></td></tr>
+        <tr><td>Fullname:</td><td> {{form.fullname}}<br></td></tr>
+        <tr><td>Date of birth:</td><td> {{form.date_of_birth}}<br></td></tr>
+        <tr><td>Speciality:</td><td> {{form.speciality}}<br></td></tr>
+        <tr><td>College:</td><td> {{form.college}}<br></td></tr>
+        <tr><td>Experience years:</td><td> {{form.experience_years}}<br></td></tr>
     {% else %}
         <tr><td>Allergies:</td><td> {{form.allergies}}<br></td></tr>
-        <tr><td>fullname:</td><td> {{form.fullname}}<br></td></tr>
-        <tr><td>date_of_birth:</td><td> {{form.date_of_birth}}<br></td></tr>
-        <tr><td>phone_number:</td><td> {{form.phone_number}}<br></td></tr>
-        <tr><td>blood_group:</td><td> {{form.blood_group}}<br></td></tr>
-        <tr><td>marital_status:</td><td> {{form.marital_status}}<br></td></tr>
-        <tr><td>emergency_Name:</td><td> {{form.emergency_Name}}<br></td></tr>
-        <tr><td>emergency_phone_number:</td><td> {{form.emergency_phone_number}}<br></td></tr>
-        <tr><td>emergency_relationship:</td><td> {{form.emergency_relationship}}<br></td></tr>
-        <tr><td>insurance_id:</td><td> {{form.insurance_id}}<br></td></tr>
-        <tr><td>insurance_company:</td><td> {{form.insurance_company}}<br></td></tr>
-        <tr><td>insurance_validity:</td><td> {{form.insurance_validity}}<br></td></tr>
+        <tr><td>Fullname:</td><td> {{form.fullname}}<br></td></tr>
+        <tr><td>Date of birth:</td><td> {{form.date_of_birth}}<br></td></tr>
+        <tr><td>Phone number:</td><td> {{form.phone_number}}<br></td></tr>
+        <tr><td>Blood group:</td><td> {{form.blood_group}}<br></td></tr>
+        <tr><td>Marital status:</td><td> {{form.marital_status}}<br></td></tr>
+        <tr><td>Emergency Name:</td><td> {{form.emergency_Name}}<br></td></tr>
+        <tr><td>Emergency phone_number:</td><td> {{form.emergency_phone_number}}<br></td></tr>
+        <tr><td>Emergency relationship:</td><td> {{form.emergency_relationship}}<br></td></tr>
+        <tr><td>Insurance id:</td><td> {{form.insurance_id}}<br></td></tr>
+        <tr><td>Insurance company:</td><td> {{form.insurance_company}}<br></td></tr>
+        <tr><td>Insurance validity:</td><td> {{form.insurance_validity}}<br></td></tr>
     {% endif %}
     </table>
     <input type="submit" value="Submit">
