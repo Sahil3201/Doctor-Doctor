@@ -48,9 +48,9 @@
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top">
         <div class="container d-flex align-items-center">
-
+            {% comment %}
             <a href="{% url 'home' %}" class="logo mr-auto"><img src="{% static 'DoctorDoctor/assets/img/logo.png' %}"
-                    alt=""></a>
+                    alt=""></a>{% endcomment %}
             <!-- Uncomment below if you prefer to use an image logo -->
             <h1 class="logo mr-auto"><a href="{% url 'home' %}">Doctor-Doctor</a></h1>
 
@@ -211,7 +211,8 @@
                     <div class="col-lg-4 col-md-6 footer-newsletter">
                         <h4>Our Newsletter</h4>
                         <p>Subscribe our newsletter to get latest updates and tips </p>
-                        <form action="" method="post">
+                        <form action="{% url 'home' %}" method="post">
+                            {% csrf_token %}
                             <input type="email" name="email"><input type="submit" value="Subscribe">
                         </form>
 
