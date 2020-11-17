@@ -139,8 +139,7 @@ class user_update( UpdateView):
     #     return super().get_context_data(**kwargs)
 
     def get_queryset(self):
-        user = self.request.user
-        queryset = Patient.objects.filter(customuser_ptr_id=user.id)
+        queryset = Patient.objects.filter(customuser_ptr_id=self.request.user.id)
         return queryset
     
     def get_object(self):
@@ -152,8 +151,10 @@ class doctor_user_update( UpdateView):
     template_name = 'accounts/profile_update.html'
     success_url = reverse_lazy('accounts:profile')
     form_class = DoctorUpdateViewForm
-    def get_context_data(self, **kwargs):
-        return super().get_context_data(**kwargs)
+
+    # def get_context_data(self, **kwargs):
+    #     user = self.request.user
+    #     return get_object_or_404(Doctor, id=user.id)
 
     def get_queryset(self):
         user = self.request.user
@@ -170,8 +171,8 @@ class list_doctors(ListView):
     context_object_name = 'doctors'
 
 from django.views.generic.edit import FormView
-class make_appointment(PermissionRequiredMixin, CreateView):
-    permission_required = 'accounts.add_appointment'
+class make_appointment(CreateView):
+    # permission_required = 'accounts.add_appointment'
 
     form_class = make_appointment_form
     template_name = 'accounts/make_appointment.html'
@@ -193,8 +194,8 @@ class make_appointment(PermissionRequiredMixin, CreateView):
         form.instance.patient = Patient.objects.filter(customuser_ptr_id=self.request.user.id).get()
         return super().form_valid(form)
 
-class see_schedule(PermissionRequiredMixin, ListView):
-    permission_required = 'accounts.view_appointment'
+class see_schedule(ListView):
+    # permission_required = 'accounts.view_appointment'
 
     model = Appointment
     template_name = 'accounts/doctor_schedule.html'

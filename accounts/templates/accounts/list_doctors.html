@@ -10,9 +10,9 @@
     <a href="{% url 'accounts:see_public_profile' pk=i.id %}"><li>
         {{i.email}}
         <ul>
-        <li><small>{% if i.speciality %}speciality: {{i.speciality}}{% endif %}</small></li>
-        <li><small>{% if i.experience_years %}experience years: {{i.experience_years}}{% endif %}</small></li>
-        <li><small>{% if i.college %}college: {{i.college}}{% endif %}</small></li>
+        <li><small>{% if i.speciality %}Speciality: {{i.speciality}}{% endif %}</small></li>
+        <li><small>{% if i.experience_years %}Experience Years: {{i.experience_years}}{% endif %}</small></li>
+        <li><small>{% if i.college %}College: {{i.college}}{% endif %}</small></li>
     </ul>
         <hr>
     </li></a>

@@ -51,12 +51,12 @@
         <tr><td>Insurance company:</td><td> {{form.insurance_company}}<br></td></tr>
         <tr><td>Insurance validity:</td><td> {{form.insurance_validity}}<br></td></tr>
     {% endif %}
-    </table>
-    <input type="submit" value="Submit">
+</table><br>
+<input type="submit" value="Submit" class="appointment-btn" style="border:none">
 </form>
 <br>
 {% if request.user|has_group:"Doctors" %}
-<a href="{% url 'accounts:see_public_profile' %}" class="appointment-btn">Cancel/a>
+<a href="{% url 'accounts:see_public_profile' pk=user.id %}" class="appointment-btn">Cancel</a>
 {% else %}
 <a href="{% url 'accounts:profile' %}" class="appointment-btn">Cancel</a>
 {% endif %}
