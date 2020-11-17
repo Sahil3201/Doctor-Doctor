@@ -7,30 +7,34 @@
 {% block inner_page %}
 <h1>Login!</h1>
 <form method="POST" action>
-	{% csrf_token %}
-	{% if form.errors %}
+    {% csrf_token %}
+    {% if form.errors %}
     {% for field in form %}
-        {% for error in field.errors %}
-            <div class="alert alert-danger">
-                <strong>{{ error|escape }}</strong>
-            </div>
-        {% endfor %}
+    {% for error in field.errors %}
+    <div class="alert alert-danger">
+        <strong>{{ error|escape }}</strong>
+    </div>
+    {% endfor %}
     {% endfor %}
     {% for error in form.non_field_errors %}
-        <div class="alert alert-danger">
-            <strong>{{ error|escape }}</strong>
-        </div>
+    <div class="alert alert-danger">
+        <strong>{{ error|escape }}</strong>
+    </div>
     {% endfor %}
     {% endif %}
-    
-	<label for="email">Email: </label>
-	<input type="text" name="email" placeholder="Email Address">
-	<br>
-	<label for="password">Password: </label>
-	<input type="password" name="password">
-	<br>
-	<input type="submit" class="btn btn-danger" value="Login">
-	<br>
-	<a href="{% url 'accounts:signup' %}">Not registered yet! Sign Up Now!</a>
+
+    <table>
+        <tr>
+            <td><label for="email">Email: </label></td>
+            <td><input type="text" name="email" placeholder="Email Address"></td>
+        </tr>
+        <tr>
+            <td><label for="password">Password: </label></td>
+            <td><input type="password" name="password"></td>
+        </tr>
+    </table>
+    <input type="submit" class="btn btn-danger" value="Login">
+    <br>
+    <a href="{% url 'accounts:signup' %}">Not registered yet! Sign Up Now!</a>
 </form>
 {% endblock %}
