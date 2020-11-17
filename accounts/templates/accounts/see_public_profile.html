@@ -25,9 +25,8 @@
 <tr>{% if fields.college %}<td>college:</td><td> {{fields.college}}{% endif %}</td></tr>
 <tr>{% if fields.experience_years %}<td>experience_years:</td><td> {{fields.experience_years}}{% endif %}</td></tr>
 </table>
-<br><button onclick="{% url 'list_doctors' %}">List of doctors</button>
-<!-- <a href="{% url 'list_doctors' %}">&lt;&lt; List of doctors</a> -->
-<br><button onclick="{% url 'accounts:make_appointment' id=fields.id %}">Make an appointment {%if fields.fullname %} with {{fields.fullname}}{% endif %}</button>
-<!-- <a href="{% url 'accounts:make_appointment' id=fields.id %}">&gt;&gt; Make an appointment {%if fields.fullname %} with {{fields.fullname}}{% endif %}</a> -->
+<br>
+<a href="{% url 'list_doctors' %}" class="appointment-btn">&lt;&lt; List of doctors</a>
+<a href="{% url 'accounts:make_appointment' id=fields.id %}" class="appointment-btn">Make an appointment {%if fields.fullname %} with {{fields.fullname}}{% endif %} &gt;&gt;</a>
 <br><br>
 {% endblock %}
