@@ -6,25 +6,25 @@
 {% block title_in_li %}Profile{% endblock %}
 
 {% block inner_page %}
-
-{% if user.name %}<br>Name: {{fields.name}}{% endif %}
-Email: {{fields.email}}
-{% if fields.fullname%}<br>fullname: {{fields.fullname}}{% endif%}
-{% if fields.date_of_birth%}<br>date_of_birth: {{fields.date_of_birth}}{% endif%}
-{% if fields.phone_number%}<br>phone_number: {{fields.phone_number}}{% endif%}
-{% if fields.blood_group%}<br>blood_group: {{fields.blood_group|full_blood_group}}{% endif%}
-{% if fields.allergies%}<br>allergies: {{fields.allergies}}{% endif%}
-{% if fields.marital_status%}<br>marital_status: {{fields.marital_status|full_marital_status}}{% endif%}
-{% if fields.emergency_Name%}<br>emergency_Name: {{fields.emergency_Name}}{% endif%}
-{% if fields.emergency_phone_number%}<br>emergency_phone_number: {{fields.emergency_phone_number}}{% endif%}
-{% if fields.emergency_relationship%}<br>emergency_relationship: {{fields.emergency_relationship}}{% endif%}
-{% if fields.insurance_id%}<br>insurance_id: {{fields.insurance_id}}{% endif%}
-{% if fields.insurance_company%}<br>insurance_company: {{fields.insurance_company}}{% endif%}
-{% if fields.insurance_validity%}<br>insurance_validity: {{fields.insurance_validity}}{% endif%}
-{% if fields.speciality %}<br>speciality: {{fields.speciality}}{% endif %}
-{% if fields.college %}<br>college: {{fields.college}}{% endif %}
-{% if fields.experience_years %}<br>experience_years: {{fields.experience_years}}{% endif %}
-
+<table>
+<tr>{% if user.name %}<td>>Name:</td> <td>{{fields.name}}{% endif %}</td></tr>
+<tr><td>Email:</td><td> {{fields.email}}</td></tr>
+<tr>{% if fields.fullname%}<td>fullname:</td><td> {{fields.fullname}}{% endif%}</td></tr>
+<tr>{% if fields.date_of_birth%}<td>date_of_birth:</td><td> {{fields.date_of_birth}}{% endif%}</td></tr>
+<tr>{% if fields.phone_number%}<td>phone_number:</td><td> {{fields.phone_number}}{% endif%}</td></tr>
+<tr>{% if fields.blood_group%}<td>blood_group:</td><td> {{fields.blood_group|full_blood_group}}{% endif%}</td></tr>
+<tr>{% if fields.allergies%}<td>allergies:</td><td> {{fields.allergies}}{% endif%}</td></tr>
+<tr>{% if fields.marital_status%}<td>marital_status:</td><td> {{fields.marital_status|full_marital_status}}{% endif%}</td></tr>
+<tr>{% if fields.emergency_Name%}<td>emergency_Name:</td><td> {{fields.emergency_Name}}{% endif%}</td></tr>
+<tr>{% if fields.emergency_phone_number%}<td>emergency_phone_number:</td><td> {{fields.emergency_phone_number}}{% endif%}</td></tr>
+<tr>{% if fields.emergency_relationship%}<td>emergency_relationship:</td><td> {{fields.emergency_relationship}}{% endif%}</td></tr>
+<tr>{% if fields.insurance_id%}<td>insurance_id:</td><td> {{fields.insurance_id}}{% endif%}</td></tr>
+<tr>{% if fields.insurance_company%}<td>insurance_company:</td><td> {{fields.insurance_company}}{% endif%}</td></tr>
+<tr>{% if fields.insurance_validity%}<td>insurance_validity:</td><td> {{fields.insurance_validity}}{% endif%}</td></tr>
+<tr>{% if fields.speciality %}<td>speciality:</td><td> {{fields.speciality}}{% endif %}</td></tr>
+<tr>{% if fields.college %}<td>college:</td><td> {{fields.college}}{% endif %}</td></tr>
+<tr>{% if fields.experience_years %}<td>experience_years:</td><td> {{fields.experience_years}}{% endif %}</td></tr>
+</table>
 <br><a href="{% url 'list_doctors' %}">&lt;&lt; List of doctors</a>
 <br><a href="{% url 'accounts:make_appointment' id=fields.id %}">&gt;&gt; Make an appointment {%if fields.fullname %} with {{fields.fullname}}{% endif %}</a>
 <br><br>
