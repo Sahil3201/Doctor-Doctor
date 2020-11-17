@@ -35,24 +35,24 @@
 
     {% if form.approved_for %}
     <h1>Approve the Appointment!</h1>
-    patient: {{patient}}<br>
-    message: {{message}}{{form.message}}<br>
-    day1: {{day1}}<br>
-    day2: {{day2}}<br>
-    day3: {{day3}}<br>
+    Patient: {{patient}}<br>
+    Message: {{message}}{{form.message}}<br>
+    Day1: {{day1}}<br>
+    Day2: {{day2}}<br>
+    Day3: {{day3}}<br>
     Approve appointment date: <u><strong>{{form.approved_for}}</strong></u> at <u><strong>{{form.approved_time}}</strong></u><br>
     <input type="submit" value="Submit">
 
     {% elif form.prescription %}
     <h1>See appointmentment details</h1>
-    patient: {{patient}}<br>
-    message: {{message}}{{form.message}}<br>
+    Patient: {{patient}}<br>
+    Message: {{message}}{{form.message}}<br>
     Approved appointment date: <u><strong>{{approved_for}}</strong></u> at <u><strong>{{approved_time}}</strong></u><br>
     {{form.prescription}}
     <input type="submit" value="Submit">
     {% else %}
-    patient: {{patient}}<br>
-    message: {{message}}{{form.message}}<br>
+    Patient: {{patient}}<br>
+    Message: {{message}}{{form.message}}<br>
     Approved appointment date: <u><strong>{{approved_for}}</strong></u> at <u><strong>{{approved_time}}</strong></u><br><br>
     Prescription: <br> {{prescription}}
     {% endif %}
