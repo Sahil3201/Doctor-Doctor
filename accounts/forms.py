@@ -118,6 +118,7 @@ class approve_appointment(forms.ModelForm):
         # widget={'message':forms.Textarea()}
 
 class write_prescription_form(forms.ModelForm):
+    prescription = CharField(widget=forms.Textarea(attrs={'placeholder': 'Prescription '}))
     class Meta:
         model = Appointment
         fields = ('prescription',)

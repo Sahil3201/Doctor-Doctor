@@ -8,7 +8,7 @@
 <ol>
     {% for i in doctors %}
     <a href="{% url 'accounts:see_public_profile' pk=i.id %}"><li>
-        {{i.email}}
+        {{i.fullname}}
         <ul>
         <li><small>{% if i.speciality %}Speciality: {{i.speciality}}{% endif %}</small></li>
         <li><small>{% if i.experience_years %}Experience Years: {{i.experience_years}}{% endif %}</small></li>

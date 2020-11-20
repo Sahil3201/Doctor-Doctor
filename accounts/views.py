@@ -261,7 +261,7 @@ def detail_appointment(request,pk):
             query.approved_for=request.POST.get('approved_for')
             query.approved_time=request.POST.get('approved_time')
             query.save()
-            approved_string = 'Your appointment with doctor '+query.doctor+' is scheduled on date '+request.POST.get('approved_for')+' at '+request.POST.get('approved_time')
+            approved_string = 'Your appointment with doctor '+str(query.doctor)+' is scheduled on date '+str(request.POST.get('approved_for'))+' at '+str(request.POST.get('approved_time'))
             client_appointment_approved_mail(email=query.patient, approved_string=approved_string)
             return redirect('accounts:see_schedule')
 
