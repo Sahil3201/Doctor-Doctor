@@ -16,8 +16,8 @@
 
 {% block inner_page %}
 <form method="POST">
-    {% csrf_token %}
 
+    {% csrf_token %}
     {% if form.errors %}
     {% for field in form %}
     {% for error in field.errors %}
@@ -33,15 +33,16 @@
     {% endfor %}
     {% endif %}
 
+
     {% if form.approved_for %}
     <h1>Approve the Appointment!</h1>
     Patient: {{patient}}<br>
     Message: {{message}}{{form.message}}<br>
-    Day1: {{day1}}<br>
-    Day2: {{day2}}<br>
-    Day3: {{day3}}<br>
+    Day 1: {{day1}}<br>
+    Day 2: {{day2}}<br>
+    Day 3: {{day3}}<br>
     Approve appointment date: <u><strong>{{form.approved_for}}</strong></u> at <u><strong>{{form.approved_time}}</strong></u><br>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" class="appointment-btn" style="border: none;">
 
     {% elif form.prescription %}
     <h1>See appointmentment details</h1>
@@ -50,14 +51,14 @@
     Approved appointment date: <u><strong>{{approved_for}}</strong></u> at <u><strong>{{approved_time}}</strong></u><br>
     {{form.prescription}}
     <input type="submit" value="Submit">
+    
     {% else %}
     Patient: {{patient}}<br>
     Message: {{message}}{{form.message}}<br>
     Approved appointment date: <u><strong>{{approved_for}}</strong></u> at <u><strong>{{approved_time}}</strong></u><br><br>
     Prescription: <br> {{prescription}}
     {% endif %}
-
-<a href="{% url 'accounts:patient_profile' id=p_id %}">See customer history</a>
+<a href="{% url 'accounts:patient_profile' id=p_id %}">&nbsp;&nbsp;&nbsp;See client history</a>
 
 
 </form>

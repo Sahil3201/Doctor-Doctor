@@ -79,7 +79,9 @@
 <div class="disease_container">
   <form method="POST" id="contact">
     {% csrf_token %}
+    <p><h4>In level options select 0 for Low , 1 for moderate and 2 for highest</h4></p>
     <fieldset>
+      
       <legend for="age">Age</legend>
       <input type="number" id="age" name="age" placeholder="Enter your age">
     </fieldset>
@@ -94,20 +96,20 @@
    <br />
    <fieldset>
     <legend for="cp">Chest pain</legend>
-      <input type="text" name="cp" id="cp" placeholder="Chest pain">
+      <input type="text" name="cp" id="cp">
     </fieldset>   <br />
    <fieldset>
     <legend for="rbp">Resting blood pressure</legend>
-      <input type="text" name="trestbps" id="rbp" placeholder="Resting blood pressure">
+      <input type="text" name="trestbps" id="rbp">
     </fieldset>
    <br />
    <fieldset>
     <legend for="chol">Serum Cholestoral in mg/dl</legend>
-     <input type="text" id="chol" name="chol" placeholder="Serum Cholestoral in mg/dl">
+     <input type="text" id="chol" name="chol">
     </fieldset>
    <br />
    <fieldset>
-      <legend>Is fasting blood Sugar > 120 mg/dl:</legend>
+      <legend>Is fasting blood Sugar > 120 mg/dl:(0 for No & 1 for yes)</legend>
       <label for="val_0">0</label>
       <input type="radio" name="fbs" value="0">
       <label for="val_1">1</label>
@@ -126,7 +128,7 @@
    <br />
    <fieldset>
     <legend for="mhra">Maximum Heart Rate Achieved</legend>
-      <input type="text" id="mhra" name="lach" placeholder="Maximum Heart Rate Achieved">
+      <input type="text" id="mhra" name="lach">
     </fieldset>
    <br />
    <fieldset>
@@ -139,7 +141,7 @@
    <br />
    <fieldset>
     <legend for="oldpeak">ST depression induced by exercise relative to rest</legend>
-      <input type="text" id="oldpeak" name="oldpeak" placeholder="ST depression induced by exercise relative to rest">
+      <input type="text" id="oldpeak" name="oldpeak">
     </fieldset>
    <br />
    <fieldset>

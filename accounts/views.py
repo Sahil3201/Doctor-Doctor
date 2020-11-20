@@ -118,9 +118,9 @@ from django.core.mail import send_mail
 from django.utils.html import strip_tags
 from django.template.loader import render_to_string
 def welcome_email(email):
-    subject = 'Verify your DoctorDoctor account'
-    message = 'Hope you are enjoying your Django Tutorials'
-    html_message = render_to_string('accounts/mail_template.html', {'email': email})
+    subject = 'Welcome to Doctor Doctor'
+    message = 'Hope you are having a blast at Doctor Doctor'
+    html_message = render_to_string('accounts/registration_mail_template.html', {'email': email})
     recepient = email
     send_mail(subject, message, EMAIL_HOST_USER, [recepient], fail_silently = False,html_message=html_message)
     return HttpResponseRedirect(reverse('home'))
@@ -171,7 +171,7 @@ class list_doctors(ListView):
     context_object_name = 'doctors'
 
 from django.views.generic.edit import FormView
-class make_appointment(CreateView):
+class make_appointment(LoginRequiredMixin, CreateView):
     # permission_required = 'accounts.add_appointment'
 
     form_class = make_appointment_form
@@ -205,6 +205,17 @@ class see_schedule(ListView):
         queryset = super().get_queryset()
         queryset = Appointment.objects.filter(doctor=self.request.user)
         return queryset
+
+
+def client_appointment_approved_mail(email, approved_string):
+    # approved_string is the complete sentence - Your appointment with doctor ....  is scheduled on date ... at ....
+    subject = 'Appointment Approved!'
+    message = 'Hope you are having a blast at Doctor Doctor'
+    html_message = render_to_string('accounts/mail_template_appointment_approved.html', {'email': email,'approved_string':approved_string})
+    recepient = email
+    send_mail(subject, message, EMAIL_HOST_USER, [recepient], fail_silently = False, html_message=html_message)
+    return HttpResponseRedirect(reverse('home'))
+
 
 from django.core.exceptions import PermissionDenied
 def detail_appointment(request,pk):
@@ -250,6 +261,8 @@ def detail_appointment(request,pk):
             query.approved_for=request.POST.get('approved_for')
             query.approved_time=request.POST.get('approved_time')
             query.save()
+            approved_string = 'Your appointment with doctor '+query.doctor+' is scheduled on date '+request.POST.get('approved_for')+' at '+request.POST.get('approved_time')
+            client_appointment_approved_mail(email=query.patient, approved_string=approved_string)
             return redirect('accounts:see_schedule')
 
 class past_appointment(ListView):
